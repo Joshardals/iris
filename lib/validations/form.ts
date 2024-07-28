@@ -2,7 +2,8 @@ import * as z from "zod";
 import { SignInValidationType, SignUpValidationType } from "@/typings/form";
 
 export const SignInValidation: z.ZodType<SignInValidationType> = z.object({
-  username: z.string().min(1, "Required field").max(100),
+  // username: z.string().min(1, "Required field").max(100),
+  email: z.string().email(),
   password: z.string().min(1, "Required field").max(20),
 });
 
@@ -28,4 +29,10 @@ export const SignUpValidation: z.ZodType<SignUpValidationType> = z.object({
   shibaWallet: z.string().max(100),
   usdtWallet: z.string().max(100),
   invitedBy: z.string().max(100),
+  marketingEmails: z.boolean().refine((val) => val === true, {
+    message: "",
+  }),
+  terms: z.boolean().refine((val) => val === true, {
+    message: "You must accept the terms and conditions",
+  }),
 });

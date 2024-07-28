@@ -16,6 +16,7 @@ import { SignInValidationType } from "@/typings/form";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { FormInput } from "../FormInput";
 
 export function LoginForm() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -23,11 +24,11 @@ export function LoginForm() {
   const form = useForm<SignInValidationType>({
     resolver: zodResolver(SignInValidation),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
   });
-  const onSubmit = async () => {};
+  const onSubmit = async (values: SignInValidationType) => {};
   return (
     <Form {...form}>
       <form
@@ -35,55 +36,20 @@ export function LoginForm() {
         className="space-y-8"
         autoComplete="off"
       >
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input
-                  autoCapitalize="none"
-                  autoComplete="false"
-                  autoCorrect="off"
-                  id="username"
-                  placeholder="Username"
-                  type="text"
-                  {...field}
-                  onChange={(e) => {
-                    form.setValue("username", e.target.value);
-                  }}
-                  disabled={loading}
-                />
-              </FormControl>
-              <FormMessage className="text-red-500 text-xs font-normal" />
-            </FormItem>
-          )}
+        <FormInput
+          form={form}
+          name="email"
+          type="text"
+          placeholder="Email"
+          loading={loading}
         />
 
-        <FormField
-          control={form.control}
+        <FormInput
+          form={form}
           name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input
-                  autoCapitalize="none"
-                  autoComplete="new-password"
-                  autoCorrect="false"
-                  id="password"
-                  placeholder="Password"
-                  type="password"
-                  {...field}
-                  onChange={(e) => {
-                    // const processedValue = valueWithoutSpaces(e.target.value);
-                    form.setValue("password", e.target.value);
-                  }}
-                  disabled={loading}
-                />
-              </FormControl>
-              <FormMessage className="text-red-500 text-xs font-normal" />
-            </FormItem>
-          )}
+          type="password"
+          placeholder="Password"
+          loading={loading}
         />
 
         <Button variant={"iris"} disabled={loading} className="w-full">

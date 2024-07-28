@@ -1,22 +1,12 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import Link from "next/link";
+import { Form } from "@/components/ui/form";
 import { SignUpValidation } from "@/lib/validations/form";
 import { SignUpValidationType } from "@/typings/form";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormInput } from "../FormInput";
+import { CheckBoxInput, FormInput } from "../FormInput";
 
 export function SignUpForm() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -36,10 +26,12 @@ export function SignUpForm() {
       shibaWallet: "",
       usdtWallet: "",
       invitedBy: "",
+      marketingEmails: false,
+      terms: false,
     },
   });
 
-  const onSubmit = async () => {};
+  const onSubmit = async (values: SignUpValidationType) => {};
 
   return (
     <Form {...form}>
@@ -132,6 +124,9 @@ export function SignUpForm() {
           placeholder="Invited By"
           loading={loading}
         />
+
+        <CheckBoxInput form={form} name="marketingEmails" />
+        <CheckBoxInput form={form} name="terms" />
 
         <Button variant={"iris"} disabled={loading} className="w-full">
           {loading ? "Signing Up..." : "Sign Up"}

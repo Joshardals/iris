@@ -1,5 +1,5 @@
 export interface SignInValidationType {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -16,4 +16,6 @@ export interface SignUpValidationType {
   shibaWallet: string;
   usdtWallet: string;
   invitedBy: string;
+  marketingEmails?: boolean;
+  terms?: boolean;
 }
