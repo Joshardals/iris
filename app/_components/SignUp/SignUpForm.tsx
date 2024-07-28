@@ -8,9 +8,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckBoxInput, FormInput } from "../FormInput";
 import { signUpUser } from "@/lib/actions/auth/auth.actions";
+import { useRouter } from "next/navigation";
 
 export function SignUpForm() {
+  const [error, setError] = useState<string | null>();
   const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const form = useForm<SignUpValidationType>({
     resolver: zodResolver(SignUpValidation),
@@ -19,31 +22,39 @@ export function SignUpForm() {
       userName: "",
       email: "",
       password: "",
-      //   bitCoinWallet: "",
-      //   ethereumWallet: "",
-      //   dogeWallet: "",
-      //   litecoinWallet: "",
-      //   tronWallet: "",
-      //   shibaWallet: "",
-      //   usdtWallet: "",
-      //   invitedBy: "",
-      //   marketingEmails: false,
-      //   terms: false,
+      bitCoinWallet: "",
+      ethereumWallet: "",
+      dogeWallet: "",
+      litecoinWallet: "",
+      tronWallet: "",
+      shibaWallet: "",
+      usdtWallet: "",
+      invitedBy: "",
+      marketingEmails: false,
+      terms: false,
     },
   });
 
   const onSubmit = async (values: SignUpValidationType) => {
     try {
       setLoading(true);
-      await signUpUser({
+      setError(null); // Clear previous errors
+
+      const result = await signUpUser({
         email: values.email,
-        name: values.userName,
+        name: values.fullName,
         password: values.password,
+        username: values.userName, 
       });
 
-      console.log("Signed Up successfull");
+      if (!result.success) {
+        setError(result.msg);
+        return;
+      }
+      router.push("/dashboard");
     } catch (error: any) {
       console.log(`Error signing up: ${error.message}`);
+      setError("An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -84,7 +95,7 @@ export function SignUpForm() {
           placeholder="Password"
           loading={loading}
         />
-        {/* <FormInput
+        <FormInput
           form={form}
           name="bitCoinWallet"
           type="text"
@@ -142,7 +153,9 @@ export function SignUpForm() {
         />
 
         <CheckBoxInput form={form} name="marketingEmails" />
-        <CheckBoxInput form={form} name="terms" /> */}
+        <CheckBoxInput form={form} name="terms" />
+
+        {error && <p className="text-red-500 font-bold">{error}</p>}
 
         <Button variant={"iris"} disabled={loading} className="w-full">
           {loading ? "Signing Up..." : "Sign Up"}

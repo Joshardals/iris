@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Iris Investment website offers a homepage that serves as a comprehensive guide to navigating the world of financial and emotional investments.",
   openGraph: {
-    images: "https://i.ibb.co/9vsp0XZ/register-Online.jpg",
+    // images: "https://i.ibb.co/9vsp0XZ/register-Online.jpg",
   },
 };
 

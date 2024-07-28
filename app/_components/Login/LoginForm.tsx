@@ -1,26 +1,20 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Form } from "@/components/ui/form";
+import { FormInput } from "../FormInput";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { signInUser } from "@/lib/actions/auth/auth.actions";
 import { SignInValidation } from "@/lib/validations/form";
 import { SignInValidationType } from "@/typings/form";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormInput } from "../FormInput";
-import { signInUser } from "@/lib/actions/auth/auth.actions";
 
 export function LoginForm() {
+  const [error, setError] = useState<string | null>();
   const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const form = useForm<SignInValidationType>({
     resolver: zodResolver(SignInValidation),
@@ -32,9 +26,21 @@ export function LoginForm() {
   const onSubmit = async (values: SignInValidationType) => {
     try {
       setLoading(true);
-      await signInUser({ email: values.email, password: values.password });
+      setError(null);
+
+      const result = await signInUser({
+        email: values.email,
+        password: values.password,
+      });
+
+      if (!result.success) {
+        setError(result.msg);
+        return;
+      }
+      router.push("/dashboard");
     } catch (error: any) {
-      console.log(`Failed to Sign in User`);
+      console.log(`An unexpected error occured: ${error.message}`);
+      setError("An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -61,6 +67,8 @@ export function LoginForm() {
           placeholder="Password"
           loading={loading}
         />
+
+        {error && <p className="text-red-500 text-xs font-bold">{error}</p>}
 
         <Button variant={"iris"} disabled={loading} className="w-full">
           {loading ? "Logging in..." : "Login"}
