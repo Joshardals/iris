@@ -1,3 +1,9 @@
+import SignUp from "@/app/_components/SignUp/SignUp";
+
 export default function SignUpPage() {
-  return <div>Sign Up page</div>;
+  return (
+    <main className="container-center">
+      <SignUp />
+    </main>
+  );
 }

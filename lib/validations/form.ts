@@ -9,11 +9,11 @@ export const SignInValidation: z.ZodType<SignInValidationType> = z.object({
 export const SignUpValidation: z.ZodType<SignUpValidationType> = z.object({
   fullName: z
     .string()
-    .min(3, "Full name must be at least 3 characters long")
-    .max(200, "First name cannot exceed 100 characters"),
+    .min(3, "Fullname must be at least 3 characters long")
+    .max(200, "Fullname cannot exceed 100 characters"),
   userName: z
     .string()
-    .min(3, "Full name must be at least 3 characters long")
+    .min(3, "Username must be at least 3 characters long")
     .max(200, "First name cannot exceed 100 characters"),
   email: z.string().email(),
   password: z
