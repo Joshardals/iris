@@ -21,18 +21,18 @@ export const SignUpValidation: z.ZodType<SignUpValidationType> = z.object({
     .string()
     .min(8, "Password must be at least 8 characters long")
     .max(20, "Password cannot exceed 20 characters"),
-  bitCoinWallet: z.string().max(100),
-  ethereumWallet: z.string().max(100),
-  dogeWallet: z.string().max(100),
-  litecoinWallet: z.string().max(100),
-  tronWallet: z.string().max(100),
-  shibaWallet: z.string().max(100),
-  usdtWallet: z.string().max(100),
-  invitedBy: z.string().max(100),
-  marketingEmails: z.boolean().refine((val) => val === true, {
-    message: "",
-  }),
-  terms: z.boolean().refine((val) => val === true, {
-    message: "You must accept the terms and conditions",
-  }),
+  // bitCoinWallet: z.string().max(100),
+  // ethereumWallet: z.string().max(100),
+  // dogeWallet: z.string().max(100),
+  // litecoinWallet: z.string().max(100),
+  // tronWallet: z.string().max(100),
+  // shibaWallet: z.string().max(100),
+  // usdtWallet: z.string().max(100),
+  // invitedBy: z.string().max(100),
+  // marketingEmails: z.boolean().refine((val) => val === true, {
+  //   message: "",
+  // }),
+  // terms: z.boolean().refine((val) => val === true, {
+  //   message: "You must accept the terms and conditions",
+  // }),
 });

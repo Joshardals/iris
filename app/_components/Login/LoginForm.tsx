@@ -17,6 +17,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormInput } from "../FormInput";
+import { signInUser } from "@/lib/actions/auth/auth.actions";
 
 export function LoginForm() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -28,7 +29,16 @@ export function LoginForm() {
       password: "",
     },
   });
-  const onSubmit = async (values: SignInValidationType) => {};
+  const onSubmit = async (values: SignInValidationType) => {
+    try {
+      setLoading(true);
+      await signInUser({ email: values.email, password: values.password });
+    } catch (error: any) {
+      console.log(`Failed to Sign in User`);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <Form {...form}>
       <form

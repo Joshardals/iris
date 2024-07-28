@@ -60,7 +60,7 @@ export function FormInput({
 
               {type === "password" && (
                 <div
-                  className="absolute top-0 right-0 h-full flex items-center px-5 cursor-pointer bg-snow select-none"
+                  className="absolute top-0 right-0 h-full flex items-center px-5 cursor-pointer bg-snow rounded-md select-none"
                   onClick={toggleInputType}
                 >
                   {eyeOpen ? (

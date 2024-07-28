@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { SignUpForm } from "./SignUpForm";
+import { getCurrentUser } from "@/lib/actions/auth/auth.actions";
 
-export default function SignUp() {
+export default async function SignUp() {
+  const user = await getCurrentUser();
+  console.log(user);
   return (
     <div className="bg-midnightGray p-5 w-full max-w-md space-y-8 rounded-lg">
       <div className="space-y-2">

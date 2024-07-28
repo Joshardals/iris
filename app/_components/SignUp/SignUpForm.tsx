@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckBoxInput, FormInput } from "../FormInput";
+import { signUpUser } from "@/lib/actions/auth/auth.actions";
 
 export function SignUpForm() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -18,20 +19,35 @@ export function SignUpForm() {
       userName: "",
       email: "",
       password: "",
-      bitCoinWallet: "",
-      ethereumWallet: "",
-      dogeWallet: "",
-      litecoinWallet: "",
-      tronWallet: "",
-      shibaWallet: "",
-      usdtWallet: "",
-      invitedBy: "",
-      marketingEmails: false,
-      terms: false,
+      //   bitCoinWallet: "",
+      //   ethereumWallet: "",
+      //   dogeWallet: "",
+      //   litecoinWallet: "",
+      //   tronWallet: "",
+      //   shibaWallet: "",
+      //   usdtWallet: "",
+      //   invitedBy: "",
+      //   marketingEmails: false,
+      //   terms: false,
     },
   });
 
-  const onSubmit = async (values: SignUpValidationType) => {};
+  const onSubmit = async (values: SignUpValidationType) => {
+    try {
+      setLoading(true);
+      await signUpUser({
+        email: values.email,
+        name: values.userName,
+        password: values.password,
+      });
+
+      console.log("Signed Up successfull");
+    } catch (error: any) {
+      console.log(`Error signing up: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Form {...form}>
@@ -68,7 +84,7 @@ export function SignUpForm() {
           placeholder="Password"
           loading={loading}
         />
-        <FormInput
+        {/* <FormInput
           form={form}
           name="bitCoinWallet"
           type="text"
@@ -126,7 +142,7 @@ export function SignUpForm() {
         />
 
         <CheckBoxInput form={form} name="marketingEmails" />
-        <CheckBoxInput form={form} name="terms" />
+        <CheckBoxInput form={form} name="terms" /> */}
 
         <Button variant={"iris"} disabled={loading} className="w-full">
           {loading ? "Signing Up..." : "Sign Up"}
