@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 export function SideBar() {
   return (
-    <aside className="fixed bg-deepNavy text-white h-screen w-full md:w-[20rem] max-lg:hidden">
+    <aside className="fixed bg-deepNavy text-white h-screen w-full md:w-[20rem] max-md:hidden">
       <div className="space-y-10">
         <div className="p-5 flex justify-center items-center">
           <Logo />
@@ -33,8 +33,8 @@ export function MobileSideBar() {
 
   return (
     <div
-      className={`fixed top-0 left-0 min-h-screen bg-deepNavy text-snow lg:hidden p-5 w-full
-    transition-transform duration-700 ${
+      className={`fixed top-0 left-0 min-h-screen bg-deepNavy text-snow md:hidden p-5 w-full
+    transition-transform duration-700 z-20 ${
       sidebarOpen ? "-translate-x-0" : "translate-x-full"
     }`}
     >

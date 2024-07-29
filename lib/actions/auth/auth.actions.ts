@@ -115,5 +115,5 @@ export async function signOutUser() {
     return error.message;
   }
 
-  redirect("/signup");
+  redirect("/login");
 }

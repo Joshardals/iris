@@ -1,12 +1,17 @@
 "use client";
 
-import { sidebarlinks } from "@/lib/data";
+import { Button } from "./ui/button";
 import Link from "next/link";
+import { sidebarlinks } from "@/lib/data";
+import { signOutUser } from "@/lib/actions/auth/auth.actions";
 import { usePathname } from "next/navigation";
 
 export function SidebarLinks() {
   const pathname = usePathname();
 
+  const handleClick = async () => {
+    await signOutUser();
+  };
   return (
     <nav>
       {/* ${adminMobileOpen && "px-0"} */}
@@ -35,6 +40,11 @@ export function SidebarLinks() {
             </li>
           );
         })}
+        <li>
+          <Button className="w-full" variant={"iris"} onClick={handleClick}>
+            Logout
+          </Button>
+        </li>
       </ul>
     </nav>
   );

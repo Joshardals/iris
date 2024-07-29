@@ -4,7 +4,7 @@
 
 @layer utilities {
   body {
-    @apply p-0 m-0 scroll-smooth bg-white text-onyx font-roboto text-[14px] overflow-x-hidden;
+    @apply p-0 m-0 scroll-smooth bg-white text-onyx font-roboto text-[14px] md:text-[16px] overflow-x-hidden;
   }
 
   .container-center {
@@ -27,7 +27,7 @@
   }
 
   .navToggle span.active:nth-child(2) {
-    @apply bg-red-500 transition-opacity duration-1000 translate-x-11 opacity-0;
+    @apply transition-opacity duration-1000 opacity-0;
   }
 
   .navToggle span.active:last-child {

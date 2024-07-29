@@ -6,6 +6,14 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+// Utility Function to format currency
+export const convertAmount = (amount: string) => {
+  return Number(amount).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+};
+
 // Utility Function to generate a referral code
 export const generateReferralCode = (): string => {
   const alphabet =

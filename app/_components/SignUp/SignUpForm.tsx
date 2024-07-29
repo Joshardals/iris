@@ -4,13 +4,14 @@ import { CheckBoxInput, FormInput } from "../FormInput";
 import { Form } from "@/components/ui/form";
 import { SignUpValidation } from "@/lib/validations/form";
 import { SignUpValidationType } from "@/typings/form";
+import { Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { signUpUser } from "@/lib/actions/auth/auth.actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-export function SignUpForm() {
+export function SignUpFormComponent() {
   const [error, setError] = useState<string | null>();
   const [loading, setLoading] = useState<boolean>(false);
   const referralParams = useSearchParams();
@@ -171,5 +172,13 @@ export function SignUpForm() {
         </Button>
       </form>
     </Form>
+  );
+}
+
+export function SignUpForm() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignUpFormComponent />
+    </Suspense>
   );
 }
