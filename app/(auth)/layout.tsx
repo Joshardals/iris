@@ -14,7 +14,7 @@ export default function AuthLayout({
   return (
     <>
       <Header />
-      <main className="relative mt-10">{children}</main>
+      <main className="relative">{children}</main>
     </>
   );
 }
