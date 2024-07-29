@@ -4,10 +4,33 @@
 
 @layer utilities {
   body {
-    @apply p-0 m-0 scroll-smooth bg-white text-onyx font-roboto text-[14px];
+    @apply p-0 m-0 scroll-smooth bg-white text-onyx font-roboto text-[14px] overflow-x-hidden;
   }
 
   .container-center {
     @apply flex items-center justify-center min-h-screen p-5;
+  }
+
+  .navToggle {
+    @apply block relative z-10 cursor-pointer;
+  }
+
+  .navToggle span {
+    @apply relative block w-[22px] h-[2px] mb-[0.3rem] z-10;
+
+    transform-origin: 1.2px 1px;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+  }
+
+  .navToggle span.active:first-child {
+    @apply rotate-45;
+  }
+
+  .navToggle span.active:nth-child(2) {
+    @apply bg-red-500 transition-opacity duration-1000 translate-x-11 opacity-0;
+  }
+
+  .navToggle span.active:last-child {
+    @apply -rotate-45;
   }
 }

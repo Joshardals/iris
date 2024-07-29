@@ -12,9 +12,9 @@ export default function AuthLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="relative">
+    <>
       <Header />
-      <div>{children}</div>
-    </main>
+      <main className="relative mt-10">{children}</main>
+    </>
   );
 }

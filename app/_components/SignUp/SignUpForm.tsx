@@ -1,14 +1,14 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { CheckBoxInput, FormInput } from "../FormInput";
 import { Form } from "@/components/ui/form";
 import { SignUpValidation } from "@/lib/validations/form";
 import { SignUpValidationType } from "@/typings/form";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckBoxInput, FormInput } from "../FormInput";
-import { signUpUser } from "@/lib/actions/auth/auth.actions";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { signUpUser } from "@/lib/actions/auth/auth.actions";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export function SignUpForm() {
   const [error, setError] = useState<string | null>();

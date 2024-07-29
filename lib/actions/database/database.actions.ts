@@ -3,8 +3,9 @@ import { databases } from "@/lib/appwrite.config";
 import { ID, Query } from "node-appwrite";
 import { UserInfoParams, UserWalletParams } from "@/typings/database";
 
-const { DATABASE_ID, USERS_ID, WALLETS_ID } = process.env;
+const { DATABASE_ID, USERS_ID, WALLETS_ID, ACCOUNT_INFO } = process.env;
 
+// Creating User Info Collection in the DB
 export async function createUserInfo({
   username,
   fullname,
@@ -37,6 +38,8 @@ export async function createUserInfo({
   }
 }
 
+// Creating Wallets Collection in the DB
+
 export async function createWallets({
   userId,
   bitcoinWallet,
@@ -67,6 +70,32 @@ export async function createWallets({
     return { success: true };
   } catch (error: any) {
     console.log(`Failed to create wallet document in the db: ${error.message}`);
+    return { success: false, msg: error.message };
+  }
+}
+
+// Creating Account Info Collection in the DB
+export async function createAccountInfo(userId: string) {
+  try {
+    await databases.createDocument(
+      DATABASE_ID as string,
+      ACCOUNT_INFO as string,
+      ID.unique(),
+      {
+        userId,
+        accountBalance: 0.0,
+        activeDeposit: 0.0,
+        earned: 0.0,
+        invested: 0.0,
+        withdrawn: 0.0,
+      }
+    );
+
+    return { success: true };
+  } catch (error: any) {
+    console.log(
+      `Failed to create Account Info Document in the db: ${error.message}`
+    );
     return { success: false, msg: error.message };
   }
 }

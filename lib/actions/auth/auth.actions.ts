@@ -2,7 +2,11 @@
 import { ID } from "node-appwrite";
 import { cookies } from "next/headers";
 import { createAdminClient, createSessionClient } from "@/lib/appwrite.config";
-import { createUserInfo, createWallets } from "../database/database.actions";
+import {
+  createAccountInfo,
+  createUserInfo,
+  createWallets,
+} from "../database/database.actions";
 import { generateReferralCode } from "@/lib/utils";
 import { redirect } from "next/navigation";
 import { Params } from "@/typings/auth";
@@ -35,6 +39,8 @@ export async function signInUser({ email, password }: Params) {
   }
 }
 
+// Creating A User
+
 export async function signUpUser({
   email,
   name,
@@ -53,6 +59,7 @@ export async function signUpUser({
     const { account } = await createAdminClient();
     const response = await account.create(ID.unique(), email!, password!, name);
     const session = await account.createEmailPasswordSession(email!, password!);
+    const userId = response.$id;
 
     cookies().set("userSession", session.secret, {
       path: "/",
@@ -69,14 +76,14 @@ export async function signUpUser({
       fullname: name,
       email,
       createdAt: response.$createdAt,
-      userId: response.$id,
+      userId,
       referralCode,
       referredBy,
     });
 
     // Creating a Wallet collection in the database.
     await createWallets({
-      userId: response.$id,
+      userId,
       bitcoinWallet,
       ethereumWallet,
       dogeWallet,
@@ -86,12 +93,17 @@ export async function signUpUser({
       usdtWallet,
     });
 
+    // Creating an Account Info collection in the database
+    await createAccountInfo(userId);
+
     return { success: true };
   } catch (error: any) {
     console.log(`Error: ${error.message}`);
     return { success: false, msg: error.message };
   }
 }
+
+// Sign Out User
 
 export async function signOutUser() {
   try {
