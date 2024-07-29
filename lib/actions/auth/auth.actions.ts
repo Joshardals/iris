@@ -2,16 +2,10 @@
 import { ID } from "node-appwrite";
 import { cookies } from "next/headers";
 import { createAdminClient, createSessionClient } from "@/lib/appwrite.config";
-import { createUserInfo } from "../database/database.actions";
+import { createUserInfo, createWallets } from "../database/database.actions";
+import { generateReferralCode } from "@/lib/utils";
 import { redirect } from "next/navigation";
-import { SquareScissorsIcon } from "lucide-react";
-
-interface Params {
-  email: string;
-  name: string;
-  password?: string;
-  username?: string;
-}
+import { Params } from "@/typings/auth";
 
 export async function getCurrentUser() {
   try {
@@ -22,16 +16,10 @@ export async function getCurrentUser() {
   }
 }
 
-export async function signInUser({
-  email,
-  password,
-}: {
-  email: string;
-  password: string;
-}) {
+export async function signInUser({ email, password }: Params) {
   try {
     const { account } = await createAdminClient();
-    const session = await account.createEmailPasswordSession(email, password);
+    const session = await account.createEmailPasswordSession(email!, password!);
 
     cookies().set("userSession", session.secret, {
       path: "/",
@@ -47,11 +35,24 @@ export async function signInUser({
   }
 }
 
-export async function signUpUser({ email, name, password, username }: Params) {
+export async function signUpUser({
+  email,
+  name,
+  password,
+  username,
+  referredBy,
+  bitcoinWallet,
+  ethereumWallet,
+  dogeWallet,
+  litecoinWallet,
+  tronWallet,
+  shibaWallet,
+  usdtWallet,
+}: Params) {
   try {
     const { account } = await createAdminClient();
-    const response = await account.create(ID.unique(), email, password!, name);
-    const session = await account.createEmailPasswordSession(email, password!);
+    const response = await account.create(ID.unique(), email!, password!, name);
+    const session = await account.createEmailPasswordSession(email!, password!);
 
     cookies().set("userSession", session.secret, {
       path: "/",
@@ -60,16 +61,34 @@ export async function signUpUser({ email, name, password, username }: Params) {
       secure: true,
     });
 
-    // If Successful
+    const referralCode = generateReferralCode(); // Generate an 8 digit unique referral code upon sign up
+
+    // Creating a User collection in the database.
     await createUserInfo({
       username,
       fullname: name,
       email,
       createdAt: response.$createdAt,
       userId: response.$id,
+      referralCode,
+      referredBy,
     });
+
+    // Creating a Wallet collection in the database.
+    await createWallets({
+      userId: response.$id,
+      bitcoinWallet,
+      ethereumWallet,
+      dogeWallet,
+      litecoinWallet,
+      tronWallet,
+      shibaWallet,
+      usdtWallet,
+    });
+
     return { success: true };
   } catch (error: any) {
+    console.log(`Error: ${error.message}`);
     return { success: false, msg: error.message };
   }
 }

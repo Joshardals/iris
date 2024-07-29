@@ -8,11 +8,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckBoxInput, FormInput } from "../FormInput";
 import { signUpUser } from "@/lib/actions/auth/auth.actions";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export function SignUpForm() {
   const [error, setError] = useState<string | null>();
   const [loading, setLoading] = useState<boolean>(false);
+  const referralParams = useSearchParams();
   const router = useRouter();
 
   const form = useForm<SignUpValidationType>({
@@ -22,14 +23,14 @@ export function SignUpForm() {
       userName: "",
       email: "",
       password: "",
-      bitCoinWallet: "",
+      bitcoinWallet: "",
       ethereumWallet: "",
       dogeWallet: "",
       litecoinWallet: "",
       tronWallet: "",
       shibaWallet: "",
       usdtWallet: "",
-      invitedBy: "",
+      // invitedBy: "",
       marketingEmails: false,
       terms: false,
     },
@@ -44,7 +45,15 @@ export function SignUpForm() {
         email: values.email,
         name: values.fullName,
         password: values.password,
-        username: values.userName, 
+        username: values.userName,
+        referredBy: referralParams.get("ref") || "none",
+        bitcoinWallet: values.bitcoinWallet,
+        ethereumWallet: values.ethereumWallet,
+        dogeWallet: values.dogeWallet,
+        litecoinWallet: values.litecoinWallet,
+        tronWallet: values.tronWallet,
+        shibaWallet: values.shibaWallet,
+        usdtWallet: values.usdtWallet,
       });
 
       if (!result.success) {
@@ -97,7 +106,7 @@ export function SignUpForm() {
         />
         <FormInput
           form={form}
-          name="bitCoinWallet"
+          name="bitcoinWallet"
           type="text"
           placeholder="Bitcoin Wallet"
           loading={loading}
@@ -141,16 +150,16 @@ export function SignUpForm() {
           form={form}
           name="usdtWallet"
           type="text"
-          placeholder="Usdt Wallet"
+          placeholder="Usdt (TRC 20) Wallet"
           loading={loading}
         />
-        <FormInput
+        {/* <FormInput
           form={form}
           name="invitedBy"
           type="text"
           placeholder="Invited By"
           loading={loading}
-        />
+        /> */}
 
         <CheckBoxInput form={form} name="marketingEmails" />
         <CheckBoxInput form={form} name="terms" />

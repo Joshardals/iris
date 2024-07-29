@@ -8,14 +8,14 @@ export interface SignUpValidationType {
   userName: string;
   email: string;
   password: string;
-  bitCoinWallet: string;
+  bitcoinWallet: string;
   ethereumWallet: string;
   dogeWallet: string;
   litecoinWallet: string;
   tronWallet: string;
   shibaWallet: string;
   usdtWallet: string;
-  invitedBy: string;
+  // invitedBy?: string;
   marketingEmails?: boolean;
   terms?: boolean;
 }
