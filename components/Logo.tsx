@@ -1,8 +1,11 @@
+"use client";
 import Image from "next/image";
+import { SidebarToggle } from "@/lib/store/store";
 
 export function Logo() {
+  const { sidebarOpen } = SidebarToggle();
   return (
-    <div className="flex items-center space-x-2 cursor-pointer">
+    <div className="flex items-center space-x-2 cursor-pointer select-none">
       <Image
         alt="Logo"
         className=" size-8"
@@ -10,7 +13,13 @@ export function Logo() {
         src="/assets/Logo.png"
         width={50}
       />
-      <h2 className="font-bold text-lg font-sans">Iris Investment</h2>
+      <h2
+        className={`font-semibold text-lg font-sans ${
+          sidebarOpen && "text-snow"
+        }`}
+      >
+        Iris Investment
+      </h2>
     </div>
   );
 }

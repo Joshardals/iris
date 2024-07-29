@@ -1,14 +1,15 @@
 "use client";
 
-import { MouseEvent, useState } from "react";
+import { SidebarToggle } from "@/lib/store/store";
+import { MouseEvent } from "react";
 
 export function NavToggle() {
-  const [mobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
+  const { sidebarOpen, setSidebarOpen } = SidebarToggle();
   const handleClick = (
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
     e.preventDefault();
-    setIsMobileNavOpen(!mobileNavOpen);
+    setSidebarOpen(!sidebarOpen);
   };
   return (
     <button
@@ -17,9 +18,9 @@ export function NavToggle() {
       onClick={handleClick}
       aria-label="Toggle Navigation"
     >
-      <span className={` bg-azure ${mobileNavOpen && "active"}`}></span>
-      <span className={` bg-azure ${mobileNavOpen && "active"}`}></span>
-      <span className={` bg-azure ${mobileNavOpen && "active"}`}></span>
+      <span className={` bg-azure ${sidebarOpen && "active"}`}></span>
+      <span className={` bg-azure ${sidebarOpen && "active"}`}></span>
+      <span className={` bg-azure ${sidebarOpen && "active"}`}></span>
     </button>
   );
 }

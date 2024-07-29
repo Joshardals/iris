@@ -20,10 +20,7 @@ const config = {
     extend: {
       colors: {
         azure: "#007aff",
-        // charcoalBlack: "#252430",
-        // emeraldGreen: "#00c26f",
-        // midnightGray: "#2b2a36",
-        // royalPurple: "#5c5681",
+        deepNavy: "#010d23",
         onyx: "#121212",
         snow: "#edf1f6",
       },
