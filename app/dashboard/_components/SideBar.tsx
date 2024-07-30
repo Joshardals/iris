@@ -1,5 +1,6 @@
 "use client";
 import { Logo } from "@/components/Logo";
+import { NavToggle } from "@/components/NavToggle";
 import { SidebarLinks } from "@/components/SidebarLinks";
 import { SidebarToggle } from "@/lib/store/store";
 import { useEffect } from "react";
@@ -34,11 +35,17 @@ export function MobileSideBar() {
   return (
     <div
       className={`fixed top-0 left-0 min-h-screen bg-deepNavy text-snow md:hidden p-5 w-full
-    transition-transform duration-700 z-20 ${
+    transition-transform duration-700 z-30 space-y-8 ${
       sidebarOpen ? "-translate-x-0" : "translate-x-full"
     }`}
     >
-      <div className={`${sidebarOpen ? "fadeIn" : "opacity-0"} mt-[4.7rem]`}>
+      <div className="flex items-center justify-between">
+        <Logo />
+        <div className=" max-h-5 pt-1">
+          <NavToggle />
+        </div>
+      </div>
+      <div className={`${sidebarOpen ? "fadeIn" : "opacity-0"} `}>
         <SidebarLinks />
       </div>
     </div>

@@ -7,9 +7,7 @@ export function DashboardHeader() {
   const { sidebarOpen } = SidebarToggle();
   return (
     <header
-      className={`fixed z-30 w-full md:hidden p-5 flex items-center justify-between  ${
-        sidebarOpen ? "text-snow" : "bg-white"
-      }`}
+      className={`fixed z-30 w-full md:hidden p-5 flex items-center justify-between bg-white`}
     >
       <Logo />
       <div className="pt-1 max-h-5">

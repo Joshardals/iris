@@ -8,8 +8,8 @@ import {
   createWallets,
 } from "../database/database.actions";
 import { generateReferralCode } from "@/lib/utils";
-import { redirect } from "next/navigation";
 import { Params } from "@/typings/auth";
+import { redirect } from "next/navigation";
 
 export async function getCurrentUser() {
   try {
@@ -115,5 +115,5 @@ export async function signOutUser() {
     return error.message;
   }
 
-  redirect("/login");
+  redirect("/");
 }

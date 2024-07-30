@@ -5,12 +5,24 @@ import Link from "next/link";
 import { sidebarlinks } from "@/lib/data";
 import { signOutUser } from "@/lib/actions/auth/auth.actions";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { SidebarToggle } from "@/lib/store/store";
 
 export function SidebarLinks() {
+  const [loading, setLoading] = useState<boolean>(false);
   const pathname = usePathname();
+  const { setSidebarOpen } = SidebarToggle();
 
   const handleClick = async () => {
-    await signOutUser();
+    try {
+      setLoading(true);
+      await signOutUser();
+    } catch (error: any) {
+      console.log(`Error: ${error.message}`);
+    } finally {
+      setLoading(false);
+      setSidebarOpen(false);
+    }
   };
   return (
     <nav>
@@ -41,8 +53,13 @@ export function SidebarLinks() {
           );
         })}
         <li>
-          <Button className="w-full" variant={"iris"} onClick={handleClick}>
-            Logout
+          <Button
+            className="w-full"
+            variant={"iris"}
+            disabled={loading}
+            onClick={handleClick}
+          >
+            {loading ? "Logging Out..." : "Logout"}
           </Button>
         </li>
       </ul>

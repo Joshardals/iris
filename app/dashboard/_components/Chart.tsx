@@ -39,9 +39,9 @@ export default function TradingViewWidget() {
         new window.TradingView.widget({
           autosize: true,
           symbol: "CRYPTOCAP:USDT",
-          interval: "4H",
+          interval: "24H",
           timezone: "Etc/UTC",
-          theme: "dark",
+          theme: "light",
           style: "1",
           locale: "en",
           enable_publishing: false,
@@ -64,7 +64,8 @@ export default function TradingViewWidget() {
 
       <div
         id="tradingview_aa4d7"
-        className="bg-darkblue w-full h-[20rem] md:h-[30rem]"
+        // className="bg-darkblue w-full h-[20rem] md:h-[30rem]"
+        className="h-[20rem]"
       />
     </div>
   );
