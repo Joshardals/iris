@@ -5,7 +5,7 @@ import Link from "next/link";
 export function Header() {
   return (
     <div>
-      <div className="p-5 flex items-center justify-between max-w-[1200px] mx-auto">
+      <div className="fixed bg-white left-0 w-full right-0 z-10 p-5 flex items-center justify-between max-w-[1200px] mx-auto">
         <Logo />
 
         {/* <div className="flex items-center space-x-4">

@@ -1,6 +1,5 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { CheckBoxInput, FormInput } from "../FormInput";
+import { ButtonInput, CheckBoxInput, FormInput } from "../FormInput";
 import { Form } from "@/components/ui/form";
 import { SignUpValidation } from "@/lib/validations/form";
 import { SignUpValidationType } from "@/typings/form";
@@ -167,9 +166,7 @@ export function SignUpFormComponent() {
 
         {error && <p className="text-red-500 font-bold">{error}</p>}
 
-        <Button variant={"iris"} disabled={loading} className="w-full">
-          {loading ? "Signing Up..." : "Sign Up"}
-        </Button>
+        <ButtonInput loading={loading} label="Sign Up" />
       </form>
     </Form>
   );

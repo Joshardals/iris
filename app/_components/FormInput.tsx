@@ -1,5 +1,7 @@
+import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
+import { FaSpinner } from "react-icons/fa";
 import {
   FormControl,
   FormField,
@@ -11,11 +13,14 @@ import Link from "next/link";
 import { useState } from "react";
 
 interface FormInputProps {
-  form: any;
-  name: string;
+  form?: any;
+  name?: string;
   type?: string;
   placeholder?: string;
   loading?: boolean;
+
+  // Button Typings.
+  label?: string;
 }
 
 export function FormInput({
@@ -36,7 +41,7 @@ export function FormInput({
   return (
     <FormField
       control={form.control}
-      name={name}
+      name={name!}
       render={({ field }) => (
         <FormItem>
           <FormControl>
@@ -83,7 +88,7 @@ export function CheckBoxInput({ form, name }: FormInputProps) {
   return (
     <FormField
       control={form.control}
-      name={name}
+      name={name!}
       render={({ field }) => (
         <FormItem className="">
           <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md">
@@ -118,5 +123,13 @@ export function CheckBoxInput({ form, name }: FormInputProps) {
         </FormItem>
       )}
     />
+  );
+}
+
+export function ButtonInput({ loading, label }: FormInputProps) {
+  return (
+    <Button variant={"iris"} disabled={loading} className="w-full">
+      {loading ? <FaSpinner className=" animate-spin" /> : label}
+    </Button>
   );
 }

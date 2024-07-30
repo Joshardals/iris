@@ -1,7 +1,6 @@
 "use client";
-import { Button } from "@/components/ui/button";
+import { ButtonInput, FormInput } from "../FormInput";
 import { Form } from "@/components/ui/form";
-import { FormInput } from "../FormInput";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signInUser } from "@/lib/actions/auth/auth.actions";
@@ -70,9 +69,7 @@ export function LoginForm() {
 
         {error && <p className="text-red-500 text-xs font-bold">{error}</p>}
 
-        <Button variant={"iris"} disabled={loading} className="w-full">
-          {loading ? "Logging in..." : "Login"}
-        </Button>
+        <ButtonInput loading={loading} label="Login" />
 
         <div className="w-[fit-content] mx-auto text-azure">
           <Link href="#">Forgot your password?</Link>
