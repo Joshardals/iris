@@ -118,7 +118,9 @@ export default function TradingViewWidget() {
 
         // Wait for the widget to load and then apply styles to the iframe
         setTimeout(() => {
-          const iframe = document.querySelector("#tradingview_aa4d7 iframe");
+          const iframe = document.querySelector<HTMLIFrameElement>(
+            "#tradingview_aa4d7 iframe"
+          );
           if (iframe) {
             iframe.style.borderRadius = "12px"; // Adjust as needed
           }
@@ -126,13 +128,14 @@ export default function TradingViewWidget() {
       }
     }
 
-    return () => (onLoadScriptRef.current = null);
+    // Return a cleanup function that sets onLoadScriptRef.current to undefined
+    return () => {
+      onLoadScriptRef.current = undefined;
+    };
   }, []);
 
   return (
     <div className="tradingview-widget-container w-full bg-snow rounded-lg overflow-hidden">
-      {" "}
-      {/* Add rounded corners and handle overflow */}
       <Script
         src="https://s3.tradingview.com/tv.js"
         onLoad={onLoadScriptRef.current}
