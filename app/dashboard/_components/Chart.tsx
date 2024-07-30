@@ -1,14 +1,12 @@
 "use client";
 import { useEffect, useRef } from "react";
 import Script from "next/script";
-import { SidebarToggle } from "@/lib/store/store";
 
 let tvScriptLoadingPromise: any;
 declare var window: Window & typeof globalThis & Record<"TradingView", any>;
 
 export default function TradingViewWidget() {
   const onLoadScriptRef = useRef<any>(null);
-  const { sidebarOpen } = SidebarToggle();
 
   useEffect(() => {
     onLoadScriptRef.current = createWidget;

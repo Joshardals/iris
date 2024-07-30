@@ -23,9 +23,9 @@ export function Header() {
           </Link>
         </div> */}
 
-        <div className=" max-h-5 pt-1">
+        {/* <div className=" max-h-5 pt-1">
           <NavToggle />
-        </div>
+        </div> */}
       </div>
     </div>
   );
