@@ -4,6 +4,7 @@ import {
   TableBody,
   TableCaption,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -18,6 +19,11 @@ interface Props {
 
 export function TableInput({ caption, header, referredUsers }: Props) {
   const pathname = usePathname();
+  // const totalAmount = depositInfo?.reduce(
+  //   (acc, value) => acc + Number(value.amount),
+  //   0
+  // );
+
   return (
     <Table className="bg-snow rounded-lg">
       <TableCaption className="text-onyx/50">{caption}</TableCaption>
@@ -51,6 +57,21 @@ export function TableInput({ caption, header, referredUsers }: Props) {
             </TableRow>
           ))}
       </TableBody>
+      {(pathname === "/dashboard/my-deposits" ||
+        pathname === "/dashboard/my-withdrawals") && (
+        <TableFooter className="border-t border-t-navyblue">
+          <TableRow>
+            <TableCell colSpan={4}>Total</TableCell>
+            <TableCell className="">
+              {/* {totalAmount?.toLocaleString("en-US", {
+               style: "currency",
+               currency: "USD",
+             })} */}
+              $0
+            </TableCell>
+          </TableRow>
+        </TableFooter>
+      )}
     </Table>
   );
 }
