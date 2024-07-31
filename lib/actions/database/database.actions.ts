@@ -101,10 +101,13 @@ export async function createAccountInfo(userId: string) {
   }
 }
 
+// Fetch the Current User Info from the database
+
 interface FetchUserInfoResponse {
   success: boolean;
-  data?: any;
+  userInfo?: any;
   msg?: string;
+  accountInfo?: any;
 }
 
 export async function fetchCurrentUserInfo(): Promise<FetchUserInfoResponse> {
@@ -114,7 +117,7 @@ export async function fetchCurrentUserInfo(): Promise<FetchUserInfoResponse> {
       throw new Error("User not authenticated");
     }
 
-    const { $id: userId } = user;
+    const { email: userId } = user;
 
     const data = await databases.listDocuments(
       DATABASE_ID as string,
@@ -122,11 +125,33 @@ export async function fetchCurrentUserInfo(): Promise<FetchUserInfoResponse> {
       [Query.equal("userId", userId)]
     );
 
-    return { success: true, data: data.documents[0] };
+    return { success: true, userInfo: data.documents[0] };
   } catch (error: any) {
     console.error(
       `Failed to fetch User Info Document from the DB: ${error.message}`
     );
+    return { success: false, msg: error.message };
+  }
+}
+
+// Fetch the Current User Account Info from the database
+export async function fetchCurrentUserAccountInfo(): Promise<FetchUserInfoResponse> {
+  try {
+    const user = await getCurrentUser();
+    if (!user) {
+      throw new Error("User not authenticated");
+    }
+
+    const { email: userId } = user;
+
+    const data = await databases.listDocuments(
+      DATABASE_ID as string,
+      ACCOUNT_INFO as string,
+      [Query.equal("userId", userId)]
+    );
+
+    return { success: true, accountInfo: data.documents[0] };
+  } catch (error: any) {
     return { success: false, msg: error.message };
   }
 }

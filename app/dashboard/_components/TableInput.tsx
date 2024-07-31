@@ -11,8 +11,8 @@ import {
 import { usePathname } from "next/navigation";
 
 interface Props {
-  caption?: string;
-  header?: string[];
+  caption: string;
+  header: string[];
   referredUsers?: any[];
 }
 
@@ -23,11 +23,18 @@ export function TableInput({ caption, header, referredUsers }: Props) {
       <TableCaption className="text-onyx/50">{caption}</TableCaption>
       <TableHeader className="hover:bg-onyx/10">
         <TableRow>
-          {header?.map((data, index) => {
+          {header.map((data, index) => {
             return (
               <TableHead
-                className={`${index === 0 && "w-[100px]"}`}
                 key={index}
+                className={`${
+                  pathname === `/dashboard/my-deposits` ||
+                  pathname === `/dashboard/my-withdrawals`
+                    ? index === 0
+                      ? "w-[100px]"
+                      : ""
+                    : ""
+                }`}
               >
                 {data}
               </TableHead>
@@ -40,7 +47,6 @@ export function TableInput({ caption, header, referredUsers }: Props) {
           referredUsers?.map((user, index) => (
             <TableRow key={index} className="hover:bg-onyx/10">
               <TableCell>{index + 1}</TableCell>
-              <TableCell>{user.email}</TableCell>
               <TableCell>{user.username}</TableCell>
             </TableRow>
           ))}

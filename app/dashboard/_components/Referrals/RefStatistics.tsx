@@ -7,7 +7,7 @@ export async function RefStatistics() {
   return (
     <TableInput
       caption="A list of your referred users"
-      header={["S/N", "Email", "Username"]}
+      header={["S/N", "Username"]}
       referredUsers={data}
     />
   );

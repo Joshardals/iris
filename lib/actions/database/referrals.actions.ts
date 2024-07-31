@@ -15,7 +15,7 @@ interface UsersResponse {
 export async function fetchReferredUsers(): Promise<UsersResponse> {
   try {
     const userInfo = await fetchCurrentUserInfo();
-    const userRefCode = userInfo.data.referralCode;
+    const userRefCode = userInfo.userInfo.referralCode;
 
     const referredUserInfo = await databases.listDocuments(
       DATABASE_ID as string,

@@ -59,7 +59,7 @@ export async function signUpUser({
     const { account } = await createAdminClient();
     const response = await account.create(ID.unique(), email!, password!, name);
     const session = await account.createEmailPasswordSession(email!, password!);
-    const userId = response.$id;
+    const userId = response.email;
 
     cookies().set("userSession", session.secret, {
       path: "/",

@@ -21,7 +21,7 @@ export const sidebarlinks = [
   },
   {
     label: "My Deposits",
-    href: "/dasboard/my-deposits",
+    href: "/dashboard/my-deposits",
     icon: <RiHistoryFill />,
   },
   {
