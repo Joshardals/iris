@@ -13,7 +13,7 @@ export default async function DashboardPage() {
       <TradingViewWidget />
 
       {/* Referral Tab */}
-      <Referral referralCode={data.referralCode} />
+      <Referral referralCode={data?.referralCode} />
     </div>
   );
 }
