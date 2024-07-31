@@ -13,7 +13,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-5 md:space-y-14">
-      <h1 className="text-2xl max-md:text-center">
+      <h1 className="text-2xl max-md:text-center capitalize">
         Welcome {userInfo?.username}
       </h1>
       <Cards data={accountInfo} />
