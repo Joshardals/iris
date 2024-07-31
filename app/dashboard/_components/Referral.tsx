@@ -17,9 +17,9 @@ const copyToClipboard = (text: string) => {
 };
 
 const Referral = ({ referralCode }: { referralCode: string }) => {
+  const refLink = `${BASE_URL}signup?ref=${referralCode}`;
   const handleCopy = () => {
-    const text = `${BASE_URL}?ref=${referralCode}`;
-    copyToClipboard(text);
+    copyToClipboard(refLink);
   };
   return (
     <div className="space-y-2 max-md:text-xs">
@@ -29,7 +29,7 @@ const Referral = ({ referralCode }: { referralCode: string }) => {
       <div className="space-y-2">
         <p>To copy your referral link, click the button below.</p>
         <div className="w-full bg-snow py-2 px-5 rounded-lg cursor-pointer">
-          <p>{`${BASE_URL}?ref=${referralCode}`}</p>
+          <p>{refLink}</p>
         </div>
       </div>
 

@@ -6,7 +6,6 @@ import { DashboardHeader } from "./_components/DashboardHeader";
 
 export const metadata: Metadata = {
   title: "Iris Investment | Dashboard",
-  //   description: "Create your login for Iris Investment",
 };
 
 export default async function DashboardLayout({
