@@ -23,16 +23,16 @@ export default function EditForm({
   const form = useForm<SignUpValidationType>({
     resolver: zodResolver(EditValidaton),
     defaultValues: {
-      fullName: userInfo.fullname,
-      userName: userInfo.username,
-      email: userInfo.email,
-      bitcoinWallet: walletInfo.bitcoinWallet,
-      ethereumWallet: walletInfo.ethereumWallet,
-      dogeWallet: walletInfo.dogeWallet,
-      litecoinWallet: walletInfo.litecoinWallet,
-      tronWallet: walletInfo.tronWallet,
-      shibaWallet: walletInfo.shibaWallet,
-      usdtWallet: walletInfo.usdtWallet,
+      fullName: userInfo?.fullname,
+      userName: userInfo?.username,
+      email: userInfo?.email,
+      bitcoinWallet: walletInfo?.bitcoinWallet,
+      ethereumWallet: walletInfo?.ethereumWallet,
+      dogeWallet: walletInfo?.dogeWallet,
+      litecoinWallet: walletInfo?.litecoinWallet,
+      tronWallet: walletInfo?.tronWallet,
+      shibaWallet: walletInfo?.shibaWallet,
+      usdtWallet: walletInfo?.usdtWallet,
     },
   });
 
