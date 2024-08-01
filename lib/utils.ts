@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 // Utility Function to format currency
-export const convertAmount = (amount: string) => {
+export const convertAmount = (amount: string | number) => {
   return Number(amount).toLocaleString("en-US", {
     style: "currency",
     currency: "USD",

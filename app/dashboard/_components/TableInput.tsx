@@ -1,4 +1,5 @@
 "use client";
+import { convertAmount } from "@/lib/utils";
 import {
   Table,
   TableBody,
@@ -59,7 +60,7 @@ export function TableInput({ caption, header, referredUsers }: Props) {
       </TableBody>
       {(pathname === "/dashboard/my-deposits" ||
         pathname === "/dashboard/my-withdrawals") && (
-        <TableFooter className="border-t border-t-navyblue">
+        <TableFooter className="bg-onyx/10">
           <TableRow>
             <TableCell colSpan={4}>Total</TableCell>
             <TableCell className="">
@@ -67,7 +68,7 @@ export function TableInput({ caption, header, referredUsers }: Props) {
                style: "currency",
                currency: "USD",
              })} */}
-              $0
+              {convertAmount(0)}
             </TableCell>
           </TableRow>
         </TableFooter>
