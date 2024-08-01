@@ -36,24 +36,43 @@ export default function EditForm({
     },
   });
 
+  const hasChanges = (
+    initialValues: SignUpValidationType,
+    currentValues: SignUpValidationType
+  ) => {
+    return Object.keys(initialValues).some(
+      (key) =>
+        initialValues[key as keyof SignUpValidationType] !==
+        currentValues[key as keyof SignUpValidationType]
+    );
+  };
+
   const onSubmit = async (values: SignUpValidationType) => {
     try {
       setLoading(true);
 
-      await updateInfo({
-        fullname: values.fullName,
-        username: values.userName,
-        bitcoinWallet: values.bitcoinWallet,
-        ethereumWallet: values.ethereumWallet,
-        dogeWallet: values.dogeWallet,
-        litecoinWallet: values.litecoinWallet,
-        tronWallet: values.tronWallet,
-        shibaWallet: values.shibaWallet,
-        usdtWallet: values.usdtWallet,
-      });
+      if (
+        hasChanges(form.formState.defaultValues as SignUpValidationType, values)
+      ) {
+        await updateInfo({
+          fullname: values.fullName,
+          username: values.userName,
+          bitcoinWallet: values.bitcoinWallet,
+          ethereumWallet: values.ethereumWallet,
+          dogeWallet: values.dogeWallet,
+          litecoinWallet: values.litecoinWallet,
+          tronWallet: values.tronWallet,
+          shibaWallet: values.shibaWallet,
+          usdtWallet: values.usdtWallet,
+        });
 
-      toast("Your Information has been successfully updated");
+        toast("Your Information has been successfully updated");
+      } else {
+        toast("No changes detected");
+      }
     } catch (error: any) {
+      toast("Failed to update Information");
+      console.error(error);
     } finally {
       setLoading(false);
     }
