@@ -45,3 +45,53 @@ export const sidebarlinks = [
     icon: <RiSettings2Line />,
   },
 ];
+
+export const plan = [
+  {
+    plan: "beginners",
+    amount: "$100 - $699",
+    term: "5",
+    percentage: "5",
+  },
+  {
+    plan: "advanced trade",
+    amount: "$700 - $1499",
+    term: "5",
+    percentage: "7",
+  },
+  {
+    plan: "professional",
+    amount: "$1500 - $3999",
+    term: "5",
+    percentage: "12",
+  },
+  {
+    plan: "promo",
+    amount: "$4000 - $8999",
+    term: "5",
+    percentage: "15",
+  },
+  {
+    plan: "master trade",
+    amount: "$9000 - $15000",
+    term: "5", 
+    percentage: "18",
+  },
+  {
+    plan: "retirement",
+    amount: "$15000 - $Unlimited",
+    term: "5",
+    percentage: "30",
+  },
+];
+
+export const method = [
+  { method: "usdt" },
+  { method: "bitcoin" },
+  { method: "ethereum" },
+  { method: "litecoin" },
+  { method: "doge" },
+  { method: "tron" },
+  { method: "bnb" },
+  { method: "shiba" },
+];

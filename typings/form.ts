@@ -19,3 +19,9 @@ export interface SignUpValidationType {
   marketingEmails?: boolean;
   terms?: boolean;
 }
+
+export interface PlansType {
+  plan: any;
+  method: any;
+  amount: string;
+}

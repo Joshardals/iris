@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { SignInValidationType, SignUpValidationType } from "@/typings/form";
+import { PlansType, SignInValidationType, SignUpValidationType } from "@/typings/form";
 
 // Form Validation for the Edit Account in the dashboard
 
@@ -46,9 +46,37 @@ export const SignUpValidation: z.ZodType<SignUpValidationType> = z.object({
   tronWallet: z.string().max(100),
   shibaWallet: z.string().max(100),
   usdtWallet: z.string().max(100),
-  // invitedBy: z.string().max(100),
   marketingEmails: z.boolean().default(false).optional(),
   terms: z.boolean().refine((val) => val === true, {
     message: "You must accept the terms and conditions",
+  }),
+});
+
+// Dashboard/Invest
+const planOptions = [
+  "beginners",
+  "advanced trade",
+  "professional",
+  "promo",
+  "master trade",
+  "retirement",
+] as const;
+
+const methodOptions = [
+  "usdt",
+  "bitcoin",
+  "ethereum",
+  "litecoin",
+  "doge",
+  "tron",
+  "bnb",
+  "shiba",
+] as const;
+
+export const PlansValidation: z.ZodType<PlansType> = z.object({
+  plan: z.enum(planOptions),
+  method: z.enum(methodOptions),
+  amount: z.string().min(1, {
+    message: "required",
   }),
 });
