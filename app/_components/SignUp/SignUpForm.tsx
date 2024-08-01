@@ -73,7 +73,7 @@ export function SignUpFormComponent() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8"
+        className="space-y-6"
         autoComplete="off"
       >
         <FormInput
@@ -153,13 +153,6 @@ export function SignUpFormComponent() {
           placeholder="Usdt (TRC 20) Wallet"
           loading={loading}
         />
-        {/* <FormInput
-          form={form}
-          name="invitedBy"
-          type="text"
-          placeholder="Invited By"
-          loading={loading}
-        /> */}
 
         <CheckBoxInput form={form} name="marketingEmails" />
         <CheckBoxInput form={form} name="terms" />

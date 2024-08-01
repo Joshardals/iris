@@ -50,9 +50,9 @@ export function FormInput({
                 autoCapitalize="none"
                 autoComplete={type === "password" ? "new-password" : "off"}
                 autoCorrect="off"
-                className={
-                  name === "invitedBy" ? "cursor-not-allowed font-bold" : ""
-                }
+                className={`
+                  ${name === "invitedBy" ? "cursor-not-allowed font-bold" : ""}
+                `}
                 id={name}
                 placeholder={placeholder}
                 type={inputType}

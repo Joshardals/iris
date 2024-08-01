@@ -11,6 +11,10 @@
     @apply flex items-center justify-center min-h-screen p-5;
   }
 
+  .editForm {
+    @apply grid grid-cols-2 max-md:grid-cols-1 max-md:gap-2;
+  }
+
   .navToggle {
     @apply block relative z-10 cursor-pointer;
   }

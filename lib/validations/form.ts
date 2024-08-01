@@ -1,21 +1,39 @@
 import * as z from "zod";
 import { SignInValidationType, SignUpValidationType } from "@/typings/form";
 
+// Form Validation for the Edit Account in the dashboard
+
+export const EditValidaton: z.ZodType<SignUpValidationType> = z.object({
+  fullName: z.string().min(3, "Required").max(200),
+  userName: z.string().min(3, "Required").max(200),
+  email: z.string().email(),
+  bitcoinWallet: z.string().max(100),
+  ethereumWallet: z.string().max(100),
+  dogeWallet: z.string().max(100),
+  litecoinWallet: z.string().max(100),
+  tronWallet: z.string().max(100),
+  shibaWallet: z.string().max(100),
+  usdtWallet: z.string().max(100),
+});
+
+// Form Validation for Sign In form.
+
 export const SignInValidation: z.ZodType<SignInValidationType> = z.object({
-  // username: z.string().min(1, "Required field").max(100),
   email: z.string().email(),
   password: z.string().min(1, "Required field").max(20),
 });
+
+// Form Validation for Sign Up Form.
 
 export const SignUpValidation: z.ZodType<SignUpValidationType> = z.object({
   fullName: z
     .string()
     .min(3, "Fullname must be at least 3 characters long")
-    .max(200, "Fullname cannot exceed 100 characters"),
+    .max(200, "Fullname cannot exceed 200 characters"),
   userName: z
     .string()
     .min(3, "Username must be at least 3 characters long")
-    .max(200, "First name cannot exceed 100 characters"),
+    .max(200, "First name cannot exceed 200 characters"),
   email: z.string().email(),
   password: z
     .string()
