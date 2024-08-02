@@ -92,12 +92,12 @@ export const plan = [
 ];
 
 export const method = [
-  { method: "usdt" },
   { method: "bitcoin" },
   { method: "ethereum" },
-  { method: "litecoin" },
   { method: "doge" },
+  { method: "litecoin" },
   { method: "tron" },
-  { method: "bnb" },
   { method: "shiba" },
+  { method: "bnb" },
+  { method: "usdt" },
 ];
