@@ -23,7 +23,6 @@ export function Invest() {
     try {
       e.preventDefault();
       setLoading(true);
-      window.alert(selectedPlan.plan);
     } catch (error: any) {
       console.error(error);
     } finally {
@@ -66,7 +65,7 @@ export function Invest() {
         ))}
       </Swiper>
 
-      <div className="bg-deepNavy p-5 text-snow capitalize font-semibold rounded-lg">
+      <div className="bg-onyx p-5 text-snow capitalize font-semibold rounded-lg">
         {/* <p>Your account balance: {convertAmount(accountBalance)}</p> */}
         <p>account balance: $1000</p>
       </div>

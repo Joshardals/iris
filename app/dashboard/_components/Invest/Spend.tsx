@@ -8,10 +8,6 @@ export function Spend() {
   const [amount, setAmount] = useState<string | number>("");
   const [selectedValue, setSelectedValue] = useState("");
 
-  useEffect(() => {
-    window.alert(selectedValue);
-  }, [selectedValue]);
-
   return (
     <div className="space-y-6">
       <Input

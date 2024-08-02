@@ -21,7 +21,7 @@ export function Cards({ data }: { data: any }) {
 
 function CardItem({ label, value }: { label: string; value: string }) {
   return (
-    <div className="bg-snow rounded-lg p-5 space-y-4">
+    <div className="bg-onyx text-snow rounded-lg p-5 space-y-4">
       <h1 className="font-semibold uppercase">{label}</h1>
       <p className="font-bold">{value}</p>
     </div>
