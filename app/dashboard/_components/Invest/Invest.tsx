@@ -25,23 +25,24 @@ export default function Invest() {
   const onSubmit = async (values: PlansType) => {};
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
-          name="plan"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className="flex flex-col space-y-1 rounded-lg"
-                >
-                  <div className=" relative">
-                    {/* {isLoading ? (
+    <div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            control={form.control}
+            name="plan"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-col space-y-1 rounded-lg"
+                  >
+                    {/* <div className=" relative">
+                    {isLoading ? (
                       <div className="absolute bg-darkblue/20 cursor-not-allowed h-full w-full" />
-                    ) : null} */}
+                    ) : null}
 
                     <div className="flex items-center gap-4">
                       {plan.map((item, index) => (
@@ -73,15 +74,16 @@ export default function Invest() {
                         </FormItem>
                       ))}
                     </div>
-                  </div>
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </form>
-    </Form>
+                  </div> */}
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </form>
+      </Form>
+    </div>
   );
 }
 

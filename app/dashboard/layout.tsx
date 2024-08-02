@@ -19,10 +19,10 @@ export default async function DashboardLayout({
   return (
     <>
       <DashboardHeader />
-      <main className="flex md:space-x-[20rem]">
+      <main className="flex flex-col md:space-x-[20rem]">
         <SideBar />
         <MobileSideBar />
-        <div className="flex-1 max-md:mt-[4.7rem] md:p-5 pb-5 px-5">
+        <div className="flex-1 max-md:mt-[4.7rem] md:p-5 pb-5 px-5 ">
           {children}
         </div>
       </main>

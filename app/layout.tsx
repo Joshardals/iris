@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import { roboto } from "./fonts";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Home | Iris Investment",

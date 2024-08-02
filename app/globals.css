@@ -37,4 +37,13 @@
   .navToggle span.active:last-child {
     @apply -rotate-45;
   }
+
+  /* React Slick Custom Styles */
+
+  .slick-center {
+    @apply h-[30rem];
+  }
+  .slick-slides {
+    @apply h-[20rem] opacity-70 transition-opacity duration-300 mt-[5rem];
+  }
 }
