@@ -36,7 +36,9 @@ function SpendItem({ value }: { value: string }) {
   return (
     <div className="flex items-center space-x-2">
       <RadioGroupItem value={value} id={value} />
-      <Label htmlFor={value}>Spend funds from {value}</Label>
+      <Label htmlFor={value} className=" cursor-pointer">
+        Spend funds from {value.toUpperCase()}
+      </Label>
     </div>
   );
 }
