@@ -44,6 +44,7 @@ export function Plans() {
       <Slider {...settings} className="">
         {plan?.map((item, index) => (
           <div
+            key={index}
             className={`bg-snow px-5 py-10 space-y-20 ${
               currentSlide === index ? "slick-center" : "slick-slides"
             }`}
