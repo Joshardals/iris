@@ -1,7 +1,7 @@
 "use client";
 import Invest from "../_components/Invest/Invest";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import Plans from "../_components/Invest/Plans";
+import { Plans } from "../_components/Invest/Plans";
 
 export default function InvestPage() {
   return (

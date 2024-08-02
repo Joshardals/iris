@@ -39,11 +39,10 @@
   }
 
   /* React Slick Custom Styles */
-
   .slick-center {
-    @apply h-[30rem];
+    @apply transition-opacity duration-300 rounded-lg border border-deepNavy/20;
   }
   .slick-slides {
-    @apply h-[20rem] opacity-70 transition-opacity duration-300 mt-[5rem];
+    @apply opacity-70 transition-all duration-300 mt-[0rem] scale-y-75;
   }
 }
