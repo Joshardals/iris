@@ -120,8 +120,10 @@ export function Invest() {
     <form onSubmit={onSubmit} className="space-y-5 select-none cursor-pointer">
       <Swiper
         slidesPerView={1}
-        spaceBetween={30}
+        spaceBetween={10}
         freeMode={true}
+        touchRatio={2}
+        resistanceRatio={0.5}
         pagination={{ clickable: true }}
         modules={[FreeMode, Pagination]}
         className="mySwiper"
