@@ -12,10 +12,12 @@ import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
 export function Invest() {
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(plan[0]);
 
   const handleSlideChange = (swiper: any) => {
+    setCurrentIndex(swiper.activeIndex);
     setSelectedPlan(plan[swiper.activeIndex]);
   };
 
@@ -36,7 +38,7 @@ export function Invest() {
         slidesPerView={1}
         spaceBetween={10}
         freeMode={true}
-        pagination={{ clickable: true }}
+        pagination={false}
         modules={[FreeMode, Pagination]}
         className="mySwiper"
         onSlideChange={handleSlideChange}
@@ -44,7 +46,9 @@ export function Invest() {
         {plan.map((item, index) => (
           <SwiperSlide
             key={index}
-            className="bg-snow px-5 py-10 space-y-20 rounded-lg"
+            className={`bg-snow px-5 py-10 space-y-20 rounded-lg transition-all duration-700 ${
+              currentIndex === index && "border-2 border-azure"
+            }`}
           >
             <div className="flex flex-col items-center space-y-2">
               <MdVerifiedUser className="size-14 text-[#10B387]" />

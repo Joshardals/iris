@@ -37,4 +37,12 @@
   .navToggle span.active:last-child {
     @apply -rotate-45;
   }
+
+  .mySwiper .swiper-pagination-bullet {
+    @apply bg-azure w-5 h-5 text-center leading-5;
+  }
+
+  .mySwiper .swiper-pagination-bullet-active {
+    @apply text-snow bg-azure;
+  }
 }
