@@ -19,9 +19,11 @@ export function Plans() {
     className: "center",
     centerMode: true,
     infinite: true,
-    centerPadding: "80px",
+    centerPadding: "30px",
     slidesToShow: 1,
-    speed: 500,
+    speed: 300, // Adjust speed for smoother transitions
+    swipeToSlide: true, // Allow swiping to slide directly
+    touchThreshold: 10, // Increase threshold to make swiping more responsive
     beforeChange: (current: any, next: any) => {
       setCurrentSlide(next);
       setSelectedPlan(plan[next]);
