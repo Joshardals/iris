@@ -53,6 +53,7 @@ export const plan = [
     term: "5",
     percentage: "5",
     referralCommision: "2",
+    minAmount: 100,
   },
   {
     plan: "advanced trade",
@@ -60,6 +61,7 @@ export const plan = [
     term: "5",
     percentage: "7",
     referralCommision: "3",
+    minAmount: 700,
   },
   {
     plan: "professional",
@@ -67,6 +69,7 @@ export const plan = [
     term: "5",
     percentage: "12",
     referralCommision: "4",
+    minAmount: 1500,
   },
   {
     plan: "promo",
@@ -74,6 +77,7 @@ export const plan = [
     term: "5",
     percentage: "15",
     referralCommision: "5",
+    minAmount: 4000,
   },
   {
     plan: "master trade",
@@ -81,6 +85,7 @@ export const plan = [
     term: "5",
     percentage: "18",
     referralCommision: "6",
+    minAmount: 9000,
   },
   {
     plan: "retirement",
@@ -88,6 +93,7 @@ export const plan = [
     term: "5",
     percentage: "30",
     referralCommision: "6",
+    minAmount: 15000,
   },
 ];
 

@@ -1,4 +1,5 @@
 "use client";
+import { convertAmount } from "@/lib/utils";
 import { FreeMode, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { IoCheckmark } from "react-icons/io5";
@@ -6,15 +7,21 @@ import { MdVerifiedUser } from "react-icons/md";
 import { ButtonInput } from "@/app/_components/FormInput";
 import { plan } from "@/lib/data";
 import { Spend } from "./Spend";
+import { SelectedAmount, SelectedMethod } from "@/lib/store/store";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
-export function Invest() {
+export function Plans({ accountBalance }: { accountBalance: number }) {
+  const { amount } = SelectedAmount();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>();
+  const [loading, setLoading] = useState<boolean>(false);
   const [selectedPlan, setSelectedPlan] = useState(plan[0]);
+  const { selectedValue } = SelectedMethod();
+  const router = useRouter();
 
   const handleSlideChange = (swiper: any) => {
     setCurrentIndex(swiper.activeIndex);
@@ -25,6 +32,18 @@ export function Invest() {
     try {
       e.preventDefault();
       setLoading(true);
+      setError(null);
+
+      if (Number(amount) >= selectedPlan.minAmount) {
+        await new Promise((resolve) => setTimeout(resolve, 2000)); // Trying to delay this for about a second to improve the user experience
+
+        router.push(
+          `/dashboard/invest/checkout?plan=${selectedPlan.plan}&amount=${amount}&spend=${selectedValue}`
+        );
+      } else
+        setError(
+          `Minimum Amount Deposit: ${convertAmount(selectedPlan.minAmount)}`
+        );
     } catch (error: any) {
       console.error(error);
     } finally {
@@ -70,11 +89,10 @@ export function Invest() {
       </Swiper>
 
       <div className="bg-onyx p-5 text-snow capitalize font-semibold rounded-lg">
-        {/* <p>Your account balance: {convertAmount(accountBalance)}</p> */}
-        <p>account balance: $1000</p>
+        <p>Your account balance: {convertAmount(accountBalance)}</p>
       </div>
 
-      <Spend />
+      <Spend error={error!} />
 
       <ButtonInput label="Spend" loading={loading} />
     </form>

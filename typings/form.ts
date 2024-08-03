@@ -25,3 +25,17 @@ export interface PlansType {
   method: any;
   amount: string;
 }
+
+// Typings for the Spend Component
+
+export interface SelectedAmountState {
+  amount: string | number;
+  setAmount: (amount: SelectedAmountState["amount"]) => void;
+}
+``;
+export interface SelectedMethodState {
+  selectedValue: string;
+  setSelectedValue: (
+    selectedValue: SelectedMethodState["selectedValue"]
+  ) => void;
+}

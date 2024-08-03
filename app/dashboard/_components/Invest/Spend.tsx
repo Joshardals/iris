@@ -2,22 +2,26 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { method } from "@/lib/data";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useState } from "react";
+import { SelectedAmount, SelectedMethod } from "@/lib/store/store";
 
-export function Spend() {
-  const [amount, setAmount] = useState<string | number>("");
-  const [selectedValue, setSelectedValue] = useState("");
+export function Spend({ error }: { error: string }) {
+  const { amount, setAmount } = SelectedAmount();
+  const { selectedValue, setSelectedValue } = SelectedMethod();
 
   return (
     <div className="space-y-6">
-      <Input
-        className="w-max"
-        placeholder="Amount to Spend"
-        type="number"
-        value={amount}
-        min="1"
-        onChange={(e) => setAmount(e.target.value)}
-      />
+      <div className="flex space-x-4 items-center">
+        <Input
+          className="w-max"
+          placeholder="Amount to Spend"
+          type="number"
+          value={amount}
+          min="1"
+          onChange={(e) => setAmount(e.target.value)}
+        />
+
+        <p className="text-red-500 text-xs font-bold">{error}</p>
+      </div>
       <RadioGroup
         defaultValue={selectedValue}
         value={selectedValue}

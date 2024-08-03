@@ -11,6 +11,9 @@ export function SidebarLinks() {
   const [loading, setLoading] = useState<boolean>(false);
   const pathname = usePathname();
   const { sidebarOpen, setSidebarOpen } = SidebarToggle();
+  const isInvestPath =
+    pathname === "/dashboard/invest" ||
+    pathname === "/dashboard/invest/checkout";
 
   const handleClick = async () => {
     try {
@@ -32,7 +35,6 @@ export function SidebarLinks() {
 
   return (
     <nav>
-      {/* ${adminMobileOpen && "px-0"} */}
       <ul className={`space-y-4 px-5 `}>
         {sidebarlinks?.map((link) => {
           const { label, href, icon } = link;
@@ -40,7 +42,8 @@ export function SidebarLinks() {
             <li
               key={label}
               className={`${
-                pathname == href && "bg-snow text-onyx"
+                (pathname == href || (label === "Invest" && isInvestPath)) &&
+                "bg-snow text-onyx"
               } py-2 px-5 hover:bg-snow hover:text-onyx
           transition-all duration-300 ease-linear rounded-md`}
               onClick={closeSidebar}

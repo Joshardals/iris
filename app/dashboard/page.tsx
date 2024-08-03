@@ -9,7 +9,6 @@ import {
 export default async function DashboardPage() {
   const { userInfo } = await fetchCurrentUserInfo();
   const { accountInfo } = await fetchCurrentUserAccountInfo();
-  console.log(userInfo);
 
   return (
     <div className="space-y-5 md:space-y-14">
