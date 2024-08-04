@@ -21,6 +21,7 @@ interface FormInputProps {
 
   // Button Typings.
   label?: string;
+  variant?: any;
 }
 
 export function FormInput({
@@ -126,9 +127,9 @@ export function CheckBoxInput({ form, name }: FormInputProps) {
   );
 }
 
-export function ButtonInput({ loading, label }: FormInputProps) {
+export function ButtonInput({ loading, label, variant }: FormInputProps) {
   return (
-    <Button variant={"iris"} disabled={loading} className="w-full">
+    <Button variant={variant || "iris"} disabled={loading} className="w-full">
       {loading ? <FaSpinner className=" animate-spin" /> : label}
     </Button>
   );

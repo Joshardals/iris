@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { roboto } from "./fonts";
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata: Metadata = {
   title: "Home | Iris Investment",

@@ -22,3 +22,10 @@ export interface UserWalletParams {
   username?: string;
   fullname?: string;
 }
+
+// Typings for Deposits and Withdrawals
+export interface UserTransactionParams {
+  amount: string;
+  method: string;
+  plan?: string;
+}

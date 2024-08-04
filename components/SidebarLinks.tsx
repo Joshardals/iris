@@ -35,7 +35,7 @@ export function SidebarLinks() {
 
   return (
     <nav>
-      <ul className={`space-y-4 px-5 `}>
+      <ul className={`space-y-4 px-5`}>
         {sidebarlinks?.map((link) => {
           const { label, href, icon } = link;
           return (

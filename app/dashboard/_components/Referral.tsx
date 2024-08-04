@@ -1,7 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const BASE_URL = "https://iris-rust-rho.vercel.app/";
 

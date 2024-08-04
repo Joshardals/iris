@@ -2,10 +2,15 @@
 import { databases } from "@/lib/appwrite.config";
 import { getCurrentUser } from "../auth/auth.actions";
 import { ID, Query } from "node-appwrite";
-import { UserInfoParams, UserWalletParams } from "@/typings/database";
+import {
+  UserInfoParams,
+  UserTransactionParams,
+  UserWalletParams,
+} from "@/typings/database";
 import { revalidatePath } from "next/cache";
 
-const { DATABASE_ID, USERS_ID, WALLETS_ID, ACCOUNT_INFO } = process.env;
+const { DATABASE_ID, USERS_ID, WALLETS_ID, ACCOUNT_INFO, DEPOSITS_ID } =
+  process.env;
 
 // Creating User Info Document in the DB
 export async function createUserInfo(data: UserInfoParams) {
@@ -85,6 +90,32 @@ export async function createAccountInfo(userId: string) {
   }
 }
 
+// Creating Deposits  Document in the DB
+export async function createDeposit(data: UserTransactionParams) {
+  try {
+    const user = await getCurrentUser();
+    const { email: userId } = user;
+
+    await databases.createDocument(
+      DATABASE_ID as string,
+      DEPOSITS_ID as string,
+      ID.unique(),
+      {
+        userId,
+        amount: Number(data.amount),
+        method: data.method,
+        status: "pending",
+        // Update the Account info Plans later on in future.
+        createdAt: new Date(),
+      }
+    );
+    revalidatePath("/dashboard/my-deposits");
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, msg: error.message };
+  }
+}
+
 // Fetch the Current User Info from the database
 
 interface FetchUserInfoResponse {
@@ -93,6 +124,7 @@ interface FetchUserInfoResponse {
   msg?: string;
   accountInfo?: any;
   walletInfo?: any;
+  deposits?: any;
 }
 
 export async function fetchCurrentUserInfo(): Promise<FetchUserInfoResponse> {
@@ -145,8 +177,25 @@ export async function fetchCurrentUserWalletInfo(): Promise<FetchUserInfoRespons
       [Query.equal("userId", userId)]
     );
 
-    console.log(data);
     return { success: true, walletInfo: data.documents[0] };
+  } catch (error: any) {
+    return { success: false, msg: error.message };
+  }
+}
+
+// Fetch the Current User Deposits from the database
+export async function fetchCurrentUserDeposits(): Promise<FetchUserInfoResponse> {
+  try {
+    const user = await getCurrentUser();
+    const { email: userId } = user;
+
+    const data = await databases.listDocuments(
+      DATABASE_ID as string,
+      DEPOSITS_ID as string,
+      [Query.equal("userId", userId)]
+    );
+
+    return { success: true, deposits: data.documents };
   } catch (error: any) {
     return { success: false, msg: error.message };
   }
