@@ -1,7 +1,6 @@
 import { convertAmount } from "@/lib/utils";
 
 export function Cards({ data }: { data: any }) {
-  console.log("Cards Data: ", data);
   return (
     <div className="grid md:grid-cols-3 gap-4">
       <CardItem

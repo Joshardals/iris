@@ -8,7 +8,6 @@ export const metadata: Metadata = {
 
 export default async function DepositsPage() {
   const { deposits } = await fetchCurrentUserDeposits();
-  console.log(deposits);
   return (
     <div className="space-y-5 md:space-y-8">
       <h2 className="font-medium text-xl">My Deposits</h2>

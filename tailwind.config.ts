@@ -21,6 +21,7 @@ const config = {
       colors: {
         azure: "#007aff",
         deepNavy: "#010d23",
+        jadeGreen: "#10B387",
         onyx: "#121212",
         snow: "#edf1f6",
       },

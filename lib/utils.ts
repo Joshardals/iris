@@ -7,10 +7,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 // Utility function to copy a text to the clipboard
-export const copyToClipboard = (text: string, method: string) => {
+export const copyToClipboard = (text: string, message: string) => {
   navigator.clipboard.writeText(text).then(
     () => {
-      toast(`${method?.toUpperCase()} Address Copied`);
+      toast(`${message}`);
     },
     (err) => {
       console.error("Failed to copy: ", err);

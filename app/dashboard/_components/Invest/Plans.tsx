@@ -72,7 +72,7 @@ export function Plans({ accountBalance }: { accountBalance: number }) {
             }`}
           >
             <div className="flex flex-col items-center space-y-2">
-              <MdVerifiedUser className="size-14 text-[#10B387]" />
+              <MdVerifiedUser className="size-14 text-jadeGreen" />
               <p className="uppercase">{item.plan} plan</p>
               <h1 className="text-2xl font-semibold">{item.percentage}%</h1>
             </div>
@@ -104,7 +104,7 @@ export function Plans({ accountBalance }: { accountBalance: number }) {
 function PlanInfo({ label, value }: { label: string; value?: string }) {
   return (
     <div className="flex items-center space-x-4">
-      <IoCheckmark className="text-[#10B387]" />
+      <IoCheckmark className="text-jadeGreen" />
       <p className="capitalize">
         {label} <span className="font-semibold">{value}</span>
       </p>
