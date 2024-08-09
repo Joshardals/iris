@@ -37,7 +37,7 @@ export function WithdrawForm({ accountBalance }: { accountBalance: string }) {
       }
 
       if (Number(amount) > Number(accountBalance)) {
-        setError2("Withdrawal amount exceeding account balance");
+        setError2("Withdrawal amount exceeding portfolio balance");
         return;
       }
 
