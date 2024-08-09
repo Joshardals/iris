@@ -70,7 +70,7 @@ export function Spend({ error, error2 }: { error: string; error2: string }) {
               onValueChange={setSelectedValue}
             >
               {method.map((item, index) => (
-                <DropdownMenuRadioItem value={item.method} className="">
+                <DropdownMenuRadioItem key={index} value={item.method} className="">
                   <p>Send {item.method.toUpperCase()}</p>
                 </DropdownMenuRadioItem>
               ))}
