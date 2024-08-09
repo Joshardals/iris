@@ -61,8 +61,18 @@ export function Spend({ error, error2 }: { error: string; error2: string }) {
               onValueChange={setSelectedValue}
             >
               {method.map((item, index) => (
-                <DropdownMenuRadioItem value={item.method} className="">
-                  <p>Send {item.method.toUpperCase()}</p>
+                <DropdownMenuRadioItem
+                  value={item.method}
+                  key={index}
+                  className=""
+                >
+                  <div className="flex items-center justify-between w-full">
+                    <p>Send {item.method.toUpperCase()}</p>
+                    <CryptoImg
+                      method={checkMethod(item.method)!}
+                      alt="Bitcoin Img"
+                    />
+                  </div>
                 </DropdownMenuRadioItem>
               ))}
             </DropdownMenuRadioGroup>
