@@ -6,6 +6,29 @@ import { toast } from "react-toastify";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+// Utility function to check the current method
+export const checkMethod = (method: string) => {
+  switch (method) {
+    case "bitcoin":
+      return "Btc";
+    case "ethereum":
+      return "Eth";
+    case "doge":
+      return "Doge";
+    case "litecoin":
+      return "Ltc";
+    case "tron":
+      return "Trx";
+    case "shiba":
+      return "Shiba";
+    case "bnb":
+      return "Bnb";
+    case "usdt":
+      return "Usdt";
+  }
+};
+
 // Utility function to copy a text to the clipboard
 export const copyToClipboard = (text: string, message: string) => {
   navigator.clipboard.writeText(text).then(
@@ -53,12 +76,24 @@ export function formatDateOnly(date: Date | string): string {
 
 // Utility Function Numbers properly
 export function formatNumberWithCommas(number: number | string): string {
+  if (number === null || number === undefined) {
+    return ""; // Return an empty string or a placeholder if the number is null
+  }
+
   // Ensure the input is a string
   const numStr = number.toString();
 
   // Use a regular expression to add commas as thousand separators
   return numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+// Utility function to format the exchange Number
+// export const formatNumber = (number: number): string => {
+//   if (number == null || number === undefined) {
+//     return "";
+//   }
+//   return Number(number.toFixed(1)).toLocaleString();
+// };
 
 // Utility Function to generate a referral code
 export const generateReferralCode = (): string => {

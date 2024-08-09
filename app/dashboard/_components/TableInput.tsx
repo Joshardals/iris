@@ -32,7 +32,14 @@ export function TableInput({
   );
 
   return (
-    <Table className="bg-snow rounded-lg">
+    <Table
+      className={`bg-snow rounded-lg ${
+        pathname === `/dashboard/my-deposits` ||
+        pathname === `/dashboard/my-withdrawals`
+          ? "max-sm:w-[35rem]"
+          : ""
+      }`}
+    >
       <TableCaption className="text-onyx/50">{caption}</TableCaption>
       <TableHeader className="hover:bg-onyx/10">
         <TableRow>
@@ -70,7 +77,9 @@ export function TableInput({
               <TableCell>{index + 1}</TableCell>
               <TableCell>{deposit.status}</TableCell>
               <TableCell>{deposit.method}</TableCell>
-              <TableCell>{formatDateOnly(deposit.createdAt)}</TableCell>
+              <TableCell className="w-[fit-content]">
+                {formatDateOnly(deposit.createdAt)}
+              </TableCell>
               <TableCell className="text-right">
                 {convertAmount(deposit.amount)}
               </TableCell>

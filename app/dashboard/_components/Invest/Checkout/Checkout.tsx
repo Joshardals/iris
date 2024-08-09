@@ -11,7 +11,7 @@ export function Checkout() {
   const searchParams = useSearchParams();
   const plan = searchParams.get("plan");
   const amount = searchParams.get("amount");
-  const method = searchParams.get("spend");
+  const method = searchParams.get("method");
   const address = "0x12272772399999999999323";
 
   const handleCopy = () => {

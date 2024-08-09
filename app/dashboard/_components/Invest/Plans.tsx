@@ -42,14 +42,14 @@ export function Plans({ accountBalance }: { accountBalance: number }) {
         await new Promise((resolve) => setTimeout(resolve, 2000)); // Trying to delay this for about a second to improve the user experience
 
         router.push(
-          `/dashboard/invest/checkout?plan=${selectedPlan.plan}&amount=${amount}&spend=${selectedValue}`
+          `/dashboard/invest/checkout?plan=${selectedPlan.plan}&amount=${amount}&method=${selectedValue}`
         );
       } else if (Number(amount) < selectedPlan.minAmount) {
         setError(
           `Minimum Amount Deposit: ${convertAmount(selectedPlan.minAmount)}`
         );
       } else if (selectedValue === "") {
-        setError2("Select a value");
+        setError2("Select a method");
       }
     } catch (error: any) {
       console.error(error);
@@ -101,7 +101,7 @@ export function Plans({ accountBalance }: { accountBalance: number }) {
 
       <Spend error={error!} error2={error2!} />
 
-      <ButtonInput label="Spend" loading={loading} />
+      <ButtonInput label="Send" loading={loading} />
     </form>
   );
 }

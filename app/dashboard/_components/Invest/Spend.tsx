@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,11 +9,11 @@ import {
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { method } from "@/lib/data";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { SelectedAmount, SelectedMethod } from "@/lib/store/store";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import { Button } from "@/components/ui/button";
+import { checkMethod } from "@/lib/utils";
 export function Spend({ error, error2 }: { error: string; error2: string }) {
   const { amount, setAmount } = SelectedAmount();
   const { selectedValue, setSelectedValue } = SelectedMethod();
@@ -34,16 +35,6 @@ export function Spend({ error, error2 }: { error: string; error2: string }) {
 
         <p className="text-red-500 text-xs font-bold">{error}</p>
       </div>
-      {/* <RadioGroup
-        defaultValue={selectedValue}
-        value={selectedValue}
-        onValueChange={(value) => setSelectedValue(value)}
-        className="space-y-4"
-      >
-        {method.map((item, index) => (
-          <SpendItem key={index} value={item.method} />
-        ))}
-      </RadioGroup> */}
 
       <div className="flex items-center space-x-4">
         <DropdownMenu>
@@ -70,8 +61,18 @@ export function Spend({ error, error2 }: { error: string; error2: string }) {
               onValueChange={setSelectedValue}
             >
               {method.map((item, index) => (
-                <DropdownMenuRadioItem value={item.method} className="">
-                  <p>Send {item.method.toUpperCase()}</p>
+                <DropdownMenuRadioItem
+                  value={item.method}
+                  key={index}
+                  className=""
+                >
+                  <div className="flex items-center justify-between w-full">
+                    <p>Send {item.method.toUpperCase()}</p>
+                    <CryptoImg
+                      method={checkMethod(item.method)!}
+                      alt="Bitcoin Img"
+                    />
+                  </div>
                 </DropdownMenuRadioItem>
               ))}
             </DropdownMenuRadioGroup>
@@ -94,13 +95,3 @@ function CryptoImg({ method, alt }: { method: string; alt?: string }) {
     />
   );
 }
-// function SpendItem({ value }: { value: string }) {
-//   return (
-//     <div className="flex items-center space-x-2">
-//       <RadioGroupItem value={value} id={value} />
-//       <Label htmlFor={value} className=" cursor-pointer">
-//         Spend funds from {value.toUpperCase()}
-//       </Label>
-//     </div>
-//   );
-// }
