@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { checkMethod } from "@/lib/utils";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,12 +9,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { method } from "@/lib/data";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { SelectedAmount, SelectedMethod } from "@/lib/store/store";
-import { checkMethod } from "@/lib/utils";
+
 export function Spend({ error, error2 }: { error: string; error2: string }) {
   const { amount, setAmount } = SelectedAmount();
   const { selectedValue, setSelectedValue } = SelectedMethod();
@@ -61,11 +60,7 @@ export function Spend({ error, error2 }: { error: string; error2: string }) {
               onValueChange={setSelectedValue}
             >
               {method.map((item, index) => (
-                <DropdownMenuRadioItem
-                  value={item.method}
-                  key={index}
-                  className=""
-                >
+                <DropdownMenuRadioItem value={item.method} key={index}>
                   <div className="flex items-center justify-between w-full">
                     <p>Send {item.method.toUpperCase()}</p>
                     <CryptoImg

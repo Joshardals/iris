@@ -104,6 +104,6 @@ export const method = [
   { method: "litecoin" },
   { method: "tron" },
   { method: "shiba" },
-  { method: "bnb" },
+  // { method: "bnb" },
   { method: "usdt" },
 ];

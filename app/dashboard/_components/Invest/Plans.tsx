@@ -9,7 +9,7 @@ import { plan } from "@/lib/data";
 import { Spend } from "./Spend";
 import { SelectedAmount, SelectedMethod } from "@/lib/store/store";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
@@ -30,29 +30,37 @@ export function Plans({ accountBalance }: { accountBalance: number }) {
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    try {
-      document.cookie =
-        "hasCheckedOut=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-      e.preventDefault();
-      setLoading(true);
-      setError(null);
-      setError2(null);
+    e.preventDefault();
+    document.cookie =
+      "hasCheckedOut=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 
+    // Reset loading and error states
+    setLoading(true);
+    setError(null);
+    setError2(null);
+
+    try {
       if (Number(amount) >= selectedPlan.minAmount && selectedValue !== "") {
         await new Promise((resolve) => setTimeout(resolve, 2000)); // Trying to delay this for about a second to improve the user experience
 
         router.push(
           `/dashboard/invest/checkout?plan=${selectedPlan.plan}&amount=${amount}&method=${selectedValue}`
         );
-      } else if (Number(amount) < selectedPlan.minAmount) {
+      }
+
+      if (Number(amount) < selectedPlan.minAmount) {
         setError(
           `Minimum Amount Deposit: ${convertAmount(selectedPlan.minAmount)}`
         );
-      } else if (selectedValue === "") {
+        return;
+      }
+
+      if (!selectedValue) {
         setError2("Select a method");
+        return;
       }
     } catch (error: any) {
-      console.error(error);
+      console.error("An unexpected error occurred:", error);
     } finally {
       setLoading(false);
     }
