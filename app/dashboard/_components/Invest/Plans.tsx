@@ -18,6 +18,7 @@ export function Plans({ accountBalance }: { accountBalance: number }) {
   const { amount } = SelectedAmount();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [error, setError] = useState<string | null>();
+  const [error2, setError2] = useState<string | null>();
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedPlan, setSelectedPlan] = useState(plan[0]);
   const { selectedValue } = SelectedMethod();
@@ -35,17 +36,21 @@ export function Plans({ accountBalance }: { accountBalance: number }) {
       e.preventDefault();
       setLoading(true);
       setError(null);
+      setError2(null);
 
-      if (Number(amount) >= selectedPlan.minAmount) {
+      if (Number(amount) >= selectedPlan.minAmount && selectedValue !== "") {
         await new Promise((resolve) => setTimeout(resolve, 2000)); // Trying to delay this for about a second to improve the user experience
 
         router.push(
           `/dashboard/invest/checkout?plan=${selectedPlan.plan}&amount=${amount}&spend=${selectedValue}`
         );
-      } else
+      } else if (Number(amount) < selectedPlan.minAmount) {
         setError(
           `Minimum Amount Deposit: ${convertAmount(selectedPlan.minAmount)}`
         );
+      } else if (selectedValue === "") {
+        setError2("Select a value");
+      }
     } catch (error: any) {
       console.error(error);
     } finally {
@@ -91,10 +96,10 @@ export function Plans({ accountBalance }: { accountBalance: number }) {
       </Swiper>
 
       <div className="bg-onyx p-5 text-snow capitalize font-semibold rounded-lg">
-        <p>Your account balance: {convertAmount(accountBalance)}</p>
+        <p>Portfolio: {convertAmount(accountBalance)}</p>
       </div>
 
-      <Spend error={error!} />
+      <Spend error={error!} error2={error2!} />
 
       <ButtonInput label="Spend" loading={loading} />
     </form>

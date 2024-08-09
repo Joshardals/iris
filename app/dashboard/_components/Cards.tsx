@@ -4,7 +4,7 @@ export function Cards({ data }: { data: any }) {
   return (
     <div className="grid md:grid-cols-3 gap-4">
       <CardItem
-        label="account balance"
+        label="portfolio"
         value={convertAmount(data?.accountBalance || 0)}
       />
       <CardItem label="earned" value={convertAmount(data?.earned || 0)} />

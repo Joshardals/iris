@@ -1,10 +1,19 @@
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { method } from "@/lib/data";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { SelectedAmount, SelectedMethod } from "@/lib/store/store";
-
-export function Spend({ error }: { error: string }) {
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { Button } from "@/components/ui/button";
+export function Spend({ error, error2 }: { error: string; error2: string }) {
   const { amount, setAmount } = SelectedAmount();
   const { selectedValue, setSelectedValue } = SelectedMethod();
 
@@ -12,7 +21,10 @@ export function Spend({ error }: { error: string }) {
     <div className="space-y-6">
       <div className="flex space-x-4 items-center">
         <Input
-          className="w-max"
+          className={`w-max ${
+            error &&
+            "border border-red-500 placeholder:text-red-500 text-red-500"
+          }`}
           placeholder="Amount to Spend"
           type="number"
           value={amount}
@@ -22,7 +34,7 @@ export function Spend({ error }: { error: string }) {
 
         <p className="text-red-500 text-xs font-bold">{error}</p>
       </div>
-      <RadioGroup
+      {/* <RadioGroup
         defaultValue={selectedValue}
         value={selectedValue}
         onValueChange={(value) => setSelectedValue(value)}
@@ -31,18 +43,64 @@ export function Spend({ error }: { error: string }) {
         {method.map((item, index) => (
           <SpendItem key={index} value={item.method} />
         ))}
-      </RadioGroup>
+      </RadioGroup> */}
+
+      <div className="flex items-center space-x-4">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="outline"
+              className={`bg-snow space-x-2 flex items-center ${
+                error2 && "border border-red-500 text-red-500 duration-300"
+              }`}
+            >
+              <p>
+                {selectedValue === ""
+                  ? "Send from"
+                  : `Send ${selectedValue.toUpperCase()}`}
+              </p>
+              <span>
+                <MdOutlineKeyboardArrowDown />
+              </span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56 mx-5 rounded-lg">
+            <DropdownMenuRadioGroup
+              value={selectedValue}
+              onValueChange={setSelectedValue}
+            >
+              {method.map((item, index) => (
+                <DropdownMenuRadioItem value={item.method} className="">
+                  <p>Send {item.method.toUpperCase()}</p>
+                </DropdownMenuRadioItem>
+              ))}
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <p className="text-red-500 text-xs font-bold">{error2}</p>
+      </div>
     </div>
   );
 }
 
-function SpendItem({ value }: { value: string }) {
+function CryptoImg({ method, alt }: { method: string; alt?: string }) {
   return (
-    <div className="flex items-center space-x-2">
-      <RadioGroupItem value={value} id={value} />
-      <Label htmlFor={value} className=" cursor-pointer">
-        Spend funds from {value.toUpperCase()}
-      </Label>
-    </div>
+    <Image
+      src={`/assets/crypto/${method}.svg`}
+      width={50}
+      height={50}
+      className="size-4"
+      alt={alt!}
+    />
   );
 }
+// function SpendItem({ value }: { value: string }) {
+//   return (
+//     <div className="flex items-center space-x-2">
+//       <RadioGroupItem value={value} id={value} />
+//       <Label htmlFor={value} className=" cursor-pointer">
+//         Spend funds from {value.toUpperCase()}
+//       </Label>
+//     </div>
+//   );
+// }
