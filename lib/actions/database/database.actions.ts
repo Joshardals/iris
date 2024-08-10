@@ -144,6 +144,7 @@ export async function createWithdrawals(data: UserTransactionParams) {
     revalidatePath("/dashboard/my-withdrawals");
     return { success: true };
   } catch (error: any) {
+    console.log(`Failed to create withdrawals: ${error.message}`);
     return { success: false, msg: error.message };
   }
 }

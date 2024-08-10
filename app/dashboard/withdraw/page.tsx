@@ -1,3 +1,4 @@
+import { convertAmount } from "@/lib/utils";
 import {
   fetchCurrentUserAccountInfo,
   fetchCurrentUserWalletInfo,
@@ -6,10 +7,8 @@ import { WithdrawForm } from "../_components/Withdraw/WithdrawForm";
 import { Exchange } from "../_components/Withdraw/Exchange/Exchange";
 
 export default async function WithdrawPage() {
-  const [{ accountInfo }, { walletInfo }] = await Promise.all([
-    await fetchCurrentUserAccountInfo(),
-    await fetchCurrentUserWalletInfo(),
-  ]);
+  const { accountInfo } = await fetchCurrentUserAccountInfo();
+  const accountBalance = accountInfo?.accountBalance;
 
   return (
     <div className="space-y-5 md:space-y-8">
@@ -21,7 +20,10 @@ export default async function WithdrawPage() {
         </p>
 
         <Exchange />
-        <WithdrawForm accountBalance={accountInfo?.accountBalance} />
+        <div className="bg-onyx p-5 text-snow capitalize font-semibold rounded-lg">
+          <p>Portfolio: {convertAmount(accountBalance)}</p>
+        </div>
+        <WithdrawForm accountBalance={accountBalance} />
       </div>
     </div>
   );
