@@ -112,7 +112,7 @@ export function CheckBoxInput({ form, name }: FormInputProps) {
                   </span>{" "}
                   and{" "}
                   <span>
-                    <Link href="#" className="text-azure">
+                    <Link href="/terms-of-service" className="text-azure">
                       Terms of Service
                     </Link>
                   </span>

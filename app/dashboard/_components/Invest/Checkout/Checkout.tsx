@@ -1,6 +1,10 @@
 "use client";
 import { CheckoutForm } from "./CheckoutForm";
-import { copyToClipboard, formatNumberWithCommas } from "@/lib/utils";
+import {
+  checkAddress,
+  copyToClipboard,
+  formatNumberWithCommas,
+} from "@/lib/utils";
 import { HiOutlineClipboardDocument } from "react-icons/hi2";
 import Link from "next/link";
 import { LuSend } from "react-icons/lu";
@@ -12,10 +16,10 @@ export function Checkout() {
   const plan = searchParams.get("plan");
   const amount = searchParams.get("amount");
   const method = searchParams.get("method");
-  const address = "0x12272772399999999999323";
+  const address = checkAddress(method!);
 
   const handleCopy = () => {
-    copyToClipboard(address, `${method?.toUpperCase()} Address Copied`);
+    copyToClipboard(address!, `${method?.toUpperCase()} Address Copied`);
   };
 
   return (

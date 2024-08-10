@@ -7,6 +7,26 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+// Utility function to switch the current method address
+export const checkAddress = (method: string) => {
+  switch (method) {
+    case "bitcoin":
+      return "bc1qawc2l7yskju76k0hsscvwee43gq7zafk4et0eh";
+    case "ethereum":
+      return "0xEEb8265369554D2d8C37f47F7Def41999a394BBe";
+    case "doge":
+      return "DQNc61NWspPLXVpH12G7GPrREk8nhcfVQH";
+    case "litecoin":
+      return "ltc1qp0radjmja4a7ldugq44eraj8l97mtewkzp2q3j";
+    case "tron":
+      return "TK7iafCgECfK7ycsqYRVWcucBCumZGyjQU";
+    case "shiba":
+      return "0xEEb8265369554D2d8C37f47F7Def41999a394BBe";
+    case "usdt":
+      return "TK7iafCgECfK7ycsqYRVWcucBCumZGyjQU";
+  }
+};
+
 // Utility function to check the current method
 export const checkMethod = (method: string) => {
   switch (method) {
@@ -22,8 +42,6 @@ export const checkMethod = (method: string) => {
       return "Trx";
     case "shiba":
       return "Shiba";
-    case "bnb":
-      return "Bnb";
     case "usdt":
       return "Usdt";
   }
@@ -86,14 +104,6 @@ export function formatNumberWithCommas(number: number | string): string {
   // Use a regular expression to add commas as thousand separators
   return numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
-// Utility function to format the exchange Number
-// export const formatNumber = (number: number): string => {
-//   if (number == null || number === undefined) {
-//     return "";
-//   }
-//   return Number(number.toFixed(1)).toLocaleString();
-// };
 
 // Utility Function to generate a referral code
 export const generateReferralCode = (): string => {
