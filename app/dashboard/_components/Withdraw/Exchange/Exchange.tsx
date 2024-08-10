@@ -3,6 +3,7 @@ import { checkMethod } from "@/lib/utils";
 import { ExchangeBody } from "./ExchangeBody";
 import { ExchangeLoading } from "./ExchangeLoading";
 import { fetchConversionRate } from "@/lib/actions/crypto/crypto.action";
+import { PiCircleNotch } from "react-icons/pi";
 import { SelectedWithdrawMethod } from "@/lib/store/store";
 import { ToastContainer } from "react-toastify";
 import { useEffect, useState } from "react";
@@ -41,11 +42,16 @@ export function Exchange() {
         </div>
 
         <div className="px-2 sm:px-5">
-          <p className="text-xs">
+          <p className="text-xs flex items-center">
             Exchange rate:{" "}
-            <span className="text-onyx">
+            <span className="text-onyx flex items-center">
               1 {checkMethod(selectedValue!)?.toUpperCase()} ={" "}
-              {loading ? "Loading..." : conversionRate} USDT
+              {loading ? (
+                <PiCircleNotch className="text-azure animate-spin" />
+              ) : (
+                conversionRate
+              )}{" "}
+              USDT
             </span>
           </p>
         </div>

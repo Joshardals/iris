@@ -11,7 +11,7 @@ import {
 
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { method } from "@/lib/data";
-import { SelectedAmount, SelectedWithdrawMethod } from "@/lib/store/store";
+import { SelectedWithdrawMethod } from "@/lib/store/store";
 
 export function ExchangeBody() {
   const { selectedValue, setSelectedValue } = SelectedWithdrawMethod();
@@ -20,7 +20,6 @@ export function ExchangeBody() {
     <div className="flex items-center justify-between p-2">
       <div className="w-20">
         <p className="text-xs">Withdraw</p>
-        {/* <p>{formatNumberWithCommas(data.amount) || 2}</p> */}
         <div className="flex items-center space-x-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild className="bg-snow appearance-none">
@@ -28,9 +27,6 @@ export function ExchangeBody() {
                 variant="outline"
                 className={` space-x-2 flex items-center p-0 outline-none`}
               >
-                {/* ${
-                  error2 && "border border-red-500 text-red-500 duration-300"
-                } */}
                 <p>{`Withdraw with ${selectedValue.toUpperCase()}`}</p>
                 <span>
                   <MdOutlineKeyboardArrowDown />
@@ -56,14 +52,11 @@ export function ExchangeBody() {
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
           </DropdownMenu>
-          {/* <p className="text-red-500 text-xs font-bold">{error2}</p> */}
         </div>
       </div>
 
       <div className="flex items-center space-x-1 text-onyx w-20">
         <CryptoImg method={checkMethod(selectedValue)!} alt="Ethereum Logo" />
-
-        {/* <p className="uppercase">{checkMethod(data.method)}</p> */}
       </div>
     </div>
   );

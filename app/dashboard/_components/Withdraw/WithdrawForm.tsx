@@ -1,22 +1,10 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import { ButtonInput } from "@/app/_components/FormInput";
-import { checkMethod } from "@/lib/utils";
 import { createWithdrawals } from "@/lib/actions/database/database.actions";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import Image from "next/image";
 import { Input } from "@/components/ui/input";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import { method } from "@/lib/data";
+import { SelectedWithdrawMethod } from "@/lib/store/store";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { SelectedWithdrawMethod } from "@/lib/store/store";
 
 export function WithdrawForm({ accountBalance }: { accountBalance: string }) {
   const [amount, setAmount] = useState<number>();
@@ -24,7 +12,7 @@ export function WithdrawForm({ accountBalance }: { accountBalance: string }) {
   const [error2, setError2] = useState<string | null>();
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
-  const { selectedValue, setSelectedValue } = SelectedWithdrawMethod();
+  const { selectedValue } = SelectedWithdrawMethod();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -87,17 +75,5 @@ export function WithdrawForm({ accountBalance }: { accountBalance: string }) {
 
       <ButtonInput label="Withdraw" loading={loading} />
     </form>
-  );
-}
-
-function CryptoImg({ method, alt }: { method: string; alt?: string }) {
-  return (
-    <Image
-      src={`/assets/crypto/${method}.svg`}
-      width={50}
-      height={50}
-      className="size-4"
-      alt={alt!}
-    />
   );
 }
