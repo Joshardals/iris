@@ -40,7 +40,7 @@ export function Spend({ error, error2 }: { error: string; error2: string }) {
           <DropdownMenuTrigger asChild>
             <Button
               variant="outline"
-              className={`bg-snow space-x-2 flex items-center ${
+              className={`bg-snow space-x-2 flex items-center outline-none ${
                 error2 && "border border-red-500 text-red-500 duration-300"
               }`}
             >

@@ -1,6 +1,10 @@
 import { create } from "zustand";
 import { MobileSidebarState } from "@/typings";
-import { SelectedAmountState, SelectedMethodState } from "@/typings/form";
+import {
+  SelectedAmountState,
+  SelectedMethodState,
+  SelectedWithdrawMethodState,
+} from "@/typings/form";
 
 export const SidebarToggle = create<MobileSidebarState>((set) => ({
   sidebarOpen: null,
@@ -17,3 +21,10 @@ export const SelectedMethod = create<SelectedMethodState>((set) => ({
   selectedValue: "",
   setSelectedValue: (selectedValue) => set(() => ({ selectedValue })),
 }));
+
+export const SelectedWithdrawMethod = create<SelectedWithdrawMethodState>(
+  (set) => ({
+    selectedValue: "usdt",
+    setSelectedValue: (selectedValue) => set(() => ({ selectedValue })),
+  })
+);

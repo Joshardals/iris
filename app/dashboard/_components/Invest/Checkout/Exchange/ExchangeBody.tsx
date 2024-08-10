@@ -15,7 +15,10 @@ export function ExchangeBody(data: ExchangeProps) {
       </div>
 
       <div className="flex items-center space-x-1 text-onyx w-20">
-        <CryptoImg method={checkMethod(data.method)!} alt="Ethereum Logo" />
+        <CryptoImg
+          method={checkMethod(data.method)!}
+          alt={`${data.method!} Img`}
+        />
 
         <p className="uppercase">{checkMethod(data.method)}</p>
       </div>

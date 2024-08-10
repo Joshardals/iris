@@ -16,6 +16,7 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { method } from "@/lib/data";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { SelectedWithdrawMethod } from "@/lib/store/store";
 
 export function WithdrawForm({ accountBalance }: { accountBalance: string }) {
   const [amount, setAmount] = useState<number>();
@@ -23,7 +24,7 @@ export function WithdrawForm({ accountBalance }: { accountBalance: string }) {
   const [error2, setError2] = useState<string | null>();
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
-  const [selectedValue, setSelectedValue] = useState("");
+  const { selectedValue, setSelectedValue } = SelectedWithdrawMethod();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,11 +35,6 @@ export function WithdrawForm({ accountBalance }: { accountBalance: string }) {
     setError2(null);
 
     try {
-      if (!selectedValue) {
-        setError("Select a method");
-        return;
-      }
-
       const currentAmount = amount ? Number(amount) : 0;
       const balance = Number(accountBalance);
 
@@ -73,54 +69,13 @@ export function WithdrawForm({ accountBalance }: { accountBalance: string }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="flex items-center space-x-4">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="outline"
-              className={`bg-snow space-x-2 flex items-center ${
-                error && "border border-red-500 text-red-500 duration-300"
-              }`}
-            >
-              <p>
-                {selectedValue === ""
-                  ? "Withdraw with"
-                  : `Withdraw with ${selectedValue.toUpperCase()}`}
-              </p>
-              <span>
-                <MdOutlineKeyboardArrowDown />
-              </span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-72 mx-5 rounded-lg">
-            <DropdownMenuRadioGroup
-              value={selectedValue}
-              onValueChange={setSelectedValue}
-            >
-              {method.map((item, index) => (
-                <DropdownMenuRadioItem value={item.method} key={index}>
-                  <div className="flex items-center justify-between w-full">
-                    <p>Withdraw with {item.method.toUpperCase()}</p>
-                    <CryptoImg
-                      method={checkMethod(item.method)!}
-                      alt="Bitcoin Img"
-                    />
-                  </div>
-                </DropdownMenuRadioItem>
-              ))}
-            </DropdownMenuRadioGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
-        <p className="text-red-500 text-xs font-bold">{error}</p>
-      </div>
-
       <div className="flex space-x-4 items-center">
         <Input
           className={`w-max ${
             error2 &&
             "border border-red-500 placeholder:text-red-500 text-red-500"
           }`}
-          placeholder="Amount to Spend"
+          placeholder="Amount to Withdraw"
           type="number"
           value={amount}
           min="1"

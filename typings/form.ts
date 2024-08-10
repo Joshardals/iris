@@ -39,3 +39,10 @@ export interface SelectedMethodState {
     selectedValue: SelectedMethodState["selectedValue"]
   ) => void;
 }
+
+export interface SelectedWithdrawMethodState {
+  selectedValue: string;
+  setSelectedValue: (
+    selectedValue: SelectedWithdrawMethodState["selectedValue"]
+  ) => void;
+}
