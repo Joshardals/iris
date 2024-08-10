@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface FormInputProps {
   form?: any;
@@ -86,17 +86,28 @@ export function FormInput({
 }
 
 export function CheckBoxInput({ form, name }: FormInputProps) {
+  const {
+    formState: { errors },
+  } = form;
+
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
+
   return (
     <FormField
       control={form.control}
       name={name!}
       render={({ field }) => (
-        <FormItem className="">
+        <FormItem>
           <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md">
             <FormControl>
               <Checkbox
                 checked={field.value}
                 onCheckedChange={field.onChange}
+                className={`${
+                  name === "terms" ? errors.terms && "border-red-500" : ""
+                }`}
               />
             </FormControl>
             <div>
@@ -120,7 +131,6 @@ export function CheckBoxInput({ form, name }: FormInputProps) {
               )}
             </div>
           </div>
-          <FormMessage className="text-red-500 text-xs font-normal px-7" />
         </FormItem>
       )}
     />

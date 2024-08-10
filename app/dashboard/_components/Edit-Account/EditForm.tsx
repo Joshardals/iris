@@ -6,6 +6,7 @@ import { SignUpValidationType } from "@/typings/form";
 import { toast } from "react-toastify";
 import { updateInfo } from "@/lib/actions/database/database.actions";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -17,6 +18,7 @@ export default function EditForm({
   walletData: any;
 }) {
   const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
   const { userInfo } = userData;
   const { walletInfo } = walletData;
 
