@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { ToastContainer, toast } from "react-toastify";
 
-const BASE_URL = "https://iris-rust-rho.vercel.app/";
+const BASE_URL = "https://irisinvestmentspro.com/";
 
 const copyToClipboard = (text: string) => {
   navigator.clipboard.writeText(text).then(
