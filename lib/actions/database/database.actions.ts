@@ -1,4 +1,5 @@
 "use server";
+import { convertAmount } from "@/lib/utils";
 import { databases } from "@/lib/appwrite.config";
 import { getCurrentUser } from "../auth/auth.actions";
 import { ID, Query } from "node-appwrite";
@@ -8,6 +9,7 @@ import {
   UserWalletParams,
 } from "@/typings/database";
 import { revalidatePath } from "next/cache";
+import { sendMail } from "../mail/mail.action";
 
 const {
   DATABASE_ID,
@@ -16,6 +18,7 @@ const {
   ACCOUNT_INFO,
   DEPOSITS_ID,
   WITHDRAWALS_ID,
+  SMTP_EMAIL,
 } = process.env;
 
 // Creating User Info Document in the DB
@@ -100,7 +103,7 @@ export async function createAccountInfo(userId: string) {
 export async function createDeposit(data: UserTransactionParams) {
   try {
     const user = await getCurrentUser();
-    const { email: userId } = user;
+    const { email: userId, name } = user;
 
     await databases.createDocument(
       DATABASE_ID as string,
@@ -115,6 +118,31 @@ export async function createDeposit(data: UserTransactionParams) {
         createdAt: new Date(),
       }
     );
+
+    await sendMail({
+      to: "joshuabamidele219@gmail.com",
+      name: "Joshardals",
+      subject: "Confirmation Of Deposit",
+      body: `<p>${userId},  has deposited a sum of ${convertAmount(
+        data.amount
+      )} for the ${data.plan?.toUpperCase()} PLAN  using the ${data.method.toUpperCase()} payment method.</p>
+      <p>Regards; Iris Investments</p>
+      `,
+    });
+
+    await sendMail({
+      to: userId,
+      name: name,
+      subject: "Processing Deposit",
+      body: `<p>Your ${convertAmount(data.amount)} ${
+        data.plan
+      } PLAN deposit is being processed and is awaiting confirmation.
+       It will be directly deposited into your account upon confirmation; please review your deposit history to ascertain the status.
+       </p>
+       <p>Regards; Iris Investment limited</p>
+       `,
+    });
+
     revalidatePath("/dashboard/my-deposits");
     return { success: true };
   } catch (error: any) {

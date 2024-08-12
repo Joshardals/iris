@@ -6,9 +6,11 @@ import { useState } from "react";
 export function CheckoutForm({
   amount,
   method,
+  plan,
 }: {
   amount: string;
   method: string;
+  plan: string;
 }) {
   const [error, setError] = useState<string | null>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -22,6 +24,7 @@ export function CheckoutForm({
       const result = await createDeposit({
         amount,
         method,
+        plan,
       });
 
       if (!result.success) {

@@ -58,7 +58,7 @@ export function Checkout() {
         </p>
       </div>
 
-      <CheckoutForm amount={amount!} method={method!} />
+      <CheckoutForm amount={amount!} method={method!} plan={plan!} />
 
       <ToastContainer />
     </div>
