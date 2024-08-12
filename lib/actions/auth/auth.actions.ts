@@ -10,6 +10,7 @@ import {
 import { generateReferralCode } from "@/lib/utils";
 import { Params } from "@/typings/auth";
 import { redirect } from "next/navigation";
+import { sendMail } from "../mail/mail.action";
 
 export async function getCurrentUser() {
   try {
@@ -79,6 +80,37 @@ export async function signUpUser({
       userId,
       referralCode,
       referredBy,
+    });
+
+    // Send a mail to the admin.
+    await sendMail({
+      to: "joshuabamidele219@gmail.com",
+      name: "Joshardals",
+      subject: `New User Registration: ${name!.toUpperCase()}`,
+      body: `<p>Hello Admin,</p>
+             <p>A new user has signed up on Iris Investments.</p>
+             <p><strong>User Details:</strong></p>
+             <ul>
+               <li>Name: ${name!.toUpperCase()}</li>
+               <li>Email: ${email}</li>
+               <li>Username: ${name}</li>
+             </ul>
+            <p>Make sure to welcome them and provide any necessary assistance to help them get started.</p>
+            <p>Best regards,</p>
+            <p>The Iris Investments System</p>`,
+    });
+
+    // Send a mail to the customer.
+    await sendMail({
+      to: email!,
+      name: name!,
+      subject: `Welcome to Iris Investments, ${name}!`,
+      body: `<p>Hello ${name!.toUpperCase()},</p>
+            <p>Welcome to Iris Investments! We're thrilled to have you on board.</p>
+            <p>Your account has been successfully created, and you can now explore our platform and make the most out of your investment opportunities.</p>
+            <p>If you have any questions or need assistance, feel free to reach out to our support team.</p>
+            <p>Best regards,</p>
+            <p>The Iris Investments Team</p>`,
     });
 
     // Creating a Wallet collection in the database.

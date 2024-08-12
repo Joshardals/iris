@@ -119,7 +119,7 @@ export async function createDeposit(data: UserTransactionParams) {
       }
     );
 
-    // Send a mail to the admin and customer.
+    // Send a mail to the admin
 
     await sendMail({
       to: "joshuabamidele219@gmail.com",
@@ -131,6 +131,8 @@ export async function createDeposit(data: UserTransactionParams) {
       <p>Regards; Iris Investments</p>
       `,
     });
+
+    // Send a mail to the customer.
 
     await sendMail({
       to: userId,
