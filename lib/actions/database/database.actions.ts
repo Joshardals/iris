@@ -119,6 +119,8 @@ export async function createDeposit(data: UserTransactionParams) {
       }
     );
 
+    // Send a mail to the admin and customer.
+
     await sendMail({
       to: "joshuabamidele219@gmail.com",
       name: "Joshardals",
@@ -154,7 +156,7 @@ export async function createDeposit(data: UserTransactionParams) {
 export async function createWithdrawals(data: UserTransactionParams) {
   try {
     const user = await getCurrentUser();
-    const { email: userId } = user;
+    const { email: userId, name } = user;
 
     await databases.createDocument(
       DATABASE_ID as string,
@@ -169,6 +171,28 @@ export async function createWithdrawals(data: UserTransactionParams) {
         createdAt: new Date(),
       }
     );
+
+    // Send a mail to the admin.
+    await sendMail({
+      to: "joshuabamidele219@gmail.com",
+      name: "Joshardals",
+      subject: "Withdrawal Request",
+      body: `<p>${userId}, ${name.toUpperCase()} has requested a withdrawal of the sum of ${convertAmount(
+        data.amount
+      )} using the ${data.method.toUpperCase()} payment method.</p>`,
+    });
+
+    // Send a mail to the customer.
+    await sendMail({
+      to: userId,
+      name: name,
+      subject: "Processing Withdrawal",
+      body: `<p>Your ${convertAmount(
+        data.amount
+      )} withdrawal is being processed and is awaiting confirmation.
+       It will directly be sent to your specified wallet address upon confirmation; please review your withdrawal history to ascertain the status.</p>`,
+    });
+
     revalidatePath("/dashboard/my-withdrawals");
     return { success: true };
   } catch (error: any) {
