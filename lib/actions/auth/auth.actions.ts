@@ -84,8 +84,8 @@ export async function signUpUser({
 
     // Send a mail to the admin.
     await sendMail({
-      to: "joshuabamidele219@gmail.com",
-      name: "Joshardals",
+      to: "irisinvest200@gmail.com",
+      name: "Iris",
       subject: `New User Registration: ${name!.toUpperCase()}`,
       body: `<p>Hello Admin,</p>
              <p>A new user has signed up on Iris Investments.</p>

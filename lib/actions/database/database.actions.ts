@@ -122,8 +122,8 @@ export async function createDeposit(data: UserTransactionParams) {
     // Send a mail to the admin
 
     await sendMail({
-      to: "joshuabamidele219@gmail.com",
-      name: "Joshardals",
+      to: "irisinvest200@gmail.com",
+      name: "Iris",
       subject: "Confirmation Of Deposit",
       body: `<p>${userId},  has deposited a sum of ${convertAmount(
         data.amount
@@ -176,8 +176,8 @@ export async function createWithdrawals(data: UserTransactionParams) {
 
     // Send a mail to the admin.
     await sendMail({
-      to: "joshuabamidele219@gmail.com",
-      name: "Joshardals",
+      to: "irisinvest200@gmail.com",
+      name: "Iris",
       subject: "Withdrawal Request",
       body: `<p>${userId}, ${name.toUpperCase()} has requested a withdrawal of the sum of ${convertAmount(
         data.amount
