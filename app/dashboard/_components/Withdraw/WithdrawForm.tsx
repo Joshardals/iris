@@ -46,6 +46,9 @@ export function WithdrawForm({ accountBalance }: { accountBalance: string }) {
           setError(result.msg);
         }
 
+        alert(
+          "Withdrawal request is successful, Kindly check your mail inbox."
+        );
         router.push("/dashboard/my-withdrawals");
       }
     } catch (error: any) {

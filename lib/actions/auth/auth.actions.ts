@@ -59,15 +59,15 @@ export async function signUpUser({
   try {
     const { account } = await createAdminClient();
     const response = await account.create(ID.unique(), email!, password!, name);
-    const session = await account.createEmailPasswordSession(email!, password!);
+    // const session = await account.createEmailPasswordSession(email!, password!);
     const userId = response.email;
 
-    cookies().set("userSession", session.secret, {
-      path: "/",
-      httpOnly: true,
-      sameSite: "strict",
-      secure: true,
-    });
+    // cookies().set("userSession", session.secret, {
+    //   path: "/",
+    //   httpOnly: true,
+    //   sameSite: "strict",
+    //   secure: true,
+    // });
 
     const referralCode = generateReferralCode(); // Generate an 8 digit unique referral code upon sign up
 

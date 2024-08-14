@@ -90,10 +90,6 @@ export function CheckBoxInput({ form, name }: FormInputProps) {
     formState: { errors },
   } = form;
 
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
-
   return (
     <FormField
       control={form.control}

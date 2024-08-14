@@ -60,7 +60,7 @@ export function SignUpFormComponent() {
         setError(result.msg);
         return;
       }
-      router.push("/dashboard");
+      router.push("/");
     } catch (error: any) {
       console.log(`Error signing up: ${error.message}`);
       setError("An unexpected error occurred. Please try again.");
